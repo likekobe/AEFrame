@@ -1,0 +1,9 @@
+E:\LIKE\AEDemo\AEDemo\bin\x64\Debug\AEDemo.exe
+E:\LIKE\AEDemo\AEDemo\bin\x64\Debug\AEDemo.pdb
+E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\ResolveAssemblyReference.cache
+E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\AEDemo.frmFrame.resources
+E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\AEDemo.Properties.Resources.resources
+E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\AEDemo.csproj.GenerateResource.Cache
+E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\AEDemo.exe.licenses
+E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\AEDemo.exe
+E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\AEDemo.pdb
