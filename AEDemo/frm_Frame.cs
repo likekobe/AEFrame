@@ -12,6 +12,7 @@ using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.Geodatabase;
+using DevExpress.XtraBars.Docking;
 
 namespace AEDemo
 {
@@ -20,7 +21,7 @@ namespace AEDemo
         public frmFrame()
         {
             InitializeComponent();
-            axMapControlEagelEye.Visible = false;
+            dockPanel1.Visibility = DockVisibility.Visible;
             CommFunction.PlayMusic();
         }
 
@@ -84,13 +85,16 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnEagleEye_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (axMapControlEagelEye.Visible == false)
+            if (dockPanel1.Visibility == DockVisibility.Hidden)
             {
-                axMapControlEagelEye.Visible = true;
+                
+                dockPanel1.Visibility = DockVisibility.Visible;
+                //axMapControlEagelEye.Visible = true;
             }
             else
             {
-                axMapControlEagelEye.Visible = false;
+                dockPanel1.Visibility = DockVisibility.Hidden;
+                //axMapControlEagelEye.Visible = false;
             }
         }
 
@@ -103,7 +107,7 @@ namespace AEDemo
         {
             //// 得到新范围
             IEnvelope pEnv = e.newEnvelope as IEnvelope;
-            IGraphicsContainer pGraphicsContainer = axMapControlEagelEye.Map as IGraphicsContainer;
+            IGraphicsContainer pGraphicsContainer = axMapControl2.Map as IGraphicsContainer;
             IActiveView pActiveView = pGraphicsContainer as IActiveView;
 
             //// 绘制新的矩形框前，清除Map对象中的任何图形元素
@@ -169,7 +173,7 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnAddLog_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            
         }
         #endregion
 
@@ -373,12 +377,18 @@ namespace AEDemo
         #region 图层树右键操作
         private void 浏览属性ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmPropertyDetails frm = new frmPropertyDetails(Parameters.g_pSelectedLayer);
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.TopMost = true;
+            frm.Owner = this;
+            frm.Show();
         }
 
         private void 图层属性ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmLayerProperty frm = new frmLayerProperty(Parameters.g_pSelectedLayer);
+            frm.TopMost = true;
+            frm.Show();
         }
 
         private void 移除图层ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -388,21 +398,50 @@ namespace AEDemo
 
         private void 缩放到图层ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //this.axMapControl1.Extent = (IEnvelope)Parameters.g_pSelectedLayer;
+            try
+            {
+                IFeatureLayer pFeaLayer = Parameters.g_pSelectedLayer as IFeatureLayer;
+                IFeatureClass pFeaClass = pFeaLayer.FeatureClass;
+                int iFeaCount = pFeaClass.FeatureCount(null);
+                //IEnvelope pEnvlope = pFeaClass.GetFeature(0).Shape.Envelope;
+                IEnvelope pEnvlope = new EnvelopeClass();
+
+                for (int i = 0; i < iFeaCount; i++)
+                {
+                    IFeature pFea = pFeaClass.GetFeature(i);
+
+                    pEnvlope.Union(pFea.Shape.Envelope);
+                }
+
+                this.axMapControl1.Extent = pEnvlope;
+                this.axMapControl1.Refresh();
+
+            }
+            catch(Exception ex)
+            {
+            
+            }
         }
 
         private void 选择ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IFeatureLayer pFeaLayer = Parameters.g_pSelectedLayer as IFeatureLayer;
-            IFeatureClass pFeaClass = pFeaLayer.FeatureClass;
-            int iFeaCount = pFeaClass.FeatureCount(null);
-
-            for (int i = 0; i < iFeaCount; i++)
+            try
             {
-                IFeature pFea = pFeaClass.GetFeature(i);
-                this.axMapControl1.Map.SelectFeature(pFeaLayer, pFea);
+                IFeatureLayer pFeaLayer = Parameters.g_pSelectedLayer as IFeatureLayer;
+                IFeatureClass pFeaClass = pFeaLayer.FeatureClass;
+                int iFeaCount = pFeaClass.FeatureCount(null);
+
+                for (int i = 0; i < iFeaCount; i++)
+                {
+                    IFeature pFea = pFeaClass.GetFeature(i);
+                    this.axMapControl1.Map.SelectFeature(pFeaLayer, pFea);
+                }
+                this.axMapControl1.Refresh();
             }
-            this.axMapControl1.Refresh();
+            catch(Exception ex)
+            {
+            
+            }
 
         } 
         #endregion
@@ -455,6 +494,8 @@ namespace AEDemo
             }
         }
         #endregion
+
+ 
 
     }
 }

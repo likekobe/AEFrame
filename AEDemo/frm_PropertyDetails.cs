@@ -14,6 +14,7 @@ namespace AEDemo
 {
     public partial class frmPropertyDetails : DevExpress.XtraEditors.XtraForm
     {
+
         public frmPropertyDetails()
         {
             InitializeComponent();
@@ -21,16 +22,30 @@ namespace AEDemo
             CommFunction.ShowPropertyDetails(this, Parameters.g_pMapControl.get_Layer(0));
         }
 
+        public frmPropertyDetails(ILayer Layer)
+        {
+            InitializeComponent();
+            tlLayer.AppendNode(new object[] { Layer.Name, 0 }, null);
+            CommFunction.ShowPropertyDetails(this, Layer);
+        }
+
         /// <summary>
         /// 在TreeList中加载图层名称
         /// </summary>
         private void TreeListLoadLayer()
         {
-            int iLayerCount = Parameters.g_pMapControl.LayerCount;
-            for (int i = 0; i < iLayerCount; i++)
+            try
             {
-                string sLayerName = Parameters.g_pMapControl.get_Layer(i).Name;
-                tlLayer.AppendNode(new object[] { sLayerName, i }, null);
+                int iLayerCount = Parameters.g_pMapControl.LayerCount;
+                for (int i = 0; i < iLayerCount; i++)
+                {
+                    string sLayerName = Parameters.g_pMapControl.get_Layer(i).Name;
+                    tlLayer.AppendNode(new object[] { sLayerName, i }, null);
+                }
+            }
+            catch(Exception ex)
+            {
+            
             }
         }
 
@@ -41,13 +56,19 @@ namespace AEDemo
         /// <param name="e"></param>
         private void tlLayer_FocusedNodeChanged(object sender, DevExpress.XtraTreeList.FocusedNodeChangedEventArgs e)
         {
-            TreeListNode node = tlLayer.FocusedNode;
-            int iLayerIndex = Convert.ToInt32(node.GetDisplayText(1));
-            string sLayerName = node.GetDisplayText(0);
-            ILayer pLayer = Parameters.g_pMapControl.get_Layer(iLayerIndex);
-            //m_pLayer = pLayer;
-            labelLayerName.Text = "图层 【" + sLayerName + "】 属性表";
-            CommFunction.ShowPropertyDetails(this, pLayer);
+            try
+            {
+                TreeListNode node = tlLayer.FocusedNode;
+                int iLayerIndex = Convert.ToInt32(node.GetDisplayText(1));
+                string sLayerName = node.GetDisplayText(0);
+                ILayer pLayer = Parameters.g_pMapControl.get_Layer(iLayerIndex);
+                labelLayerName.Text = "图层 【" + sLayerName + "】 属性表";
+                CommFunction.ShowPropertyDetails(this, pLayer);
+            }
+            catch(Exception ex)
+            {
+            
+            }
         }
 
         /// <summary>
@@ -57,17 +78,17 @@ namespace AEDemo
         /// <param name="e"></param>
         private void gvFieldInfo_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && e.Clicks == 2) // 判断是否是用鼠标双击    
+            //// 判断是否是用鼠标双击    
+            if (e.Button == MouseButtons.Left && e.Clicks == 2) 
             {
-              
-                DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo gridHitInfo=gvFieldInfo.CalcHitInfo(new Point(e.X,e.Y));
+                DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo gridHitInfo = gvFieldInfo.CalcHitInfo(new Point(e.X, e.Y));
 
                 //// 判断光标是否在行内  
-                if (gridHitInfo.InRow)    
+                if (gridHitInfo.InRow)
                 {
                     CommFunction.FlashShape(this, (frmFrame)this.Owner);
                 }
-            }    
+            }
         }
 
 

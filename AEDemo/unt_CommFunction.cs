@@ -134,26 +134,33 @@ namespace AEDemo
         /// <param name="Play">是否正在播放的标识</param>
         public static void PlayMusic()
         {
-           
-         
+
+
             //string sCmd = @"open ""E:\LIKE\AEDemo\AEDemo\bin\x86\bgm\安妮的仙境(annie's w'onderland).mp3"" alias temp_alias";
-            
+
             //// ？？？？？怎么设置相对路径啊，格式总写不对
             //// ！！！！！格式问题搞定啦，sCmd就是命令
             //mciSendString(@"open ""E:\LIKE\AEDemo\AEDemo\bin\x86\bgm\安妮的仙境(annie's w'onderland).mp3"" alias temp_alias", null, 0, 0);
 
-            string sCmd = "open " + '"' + Parameters.g_sBgmPath + "安妮的仙境(annie's w'onderland).mp3" + '"' + " alias temp_alias";
-            mciSendString("close temp_alias", null, 0, 0);
-            mciSendString(sCmd, null, 0, 0);
-            if (Parameters.g_bPlayMusic == false)
+            try
             {
-                mciSendString("play temp_alias repeat", null, 0, 0);
-                Parameters.g_bPlayMusic = true;
+                string sCmd = "open " + '"' + Parameters.g_sBgmPath + "安妮的仙境(annie's w'onderland).mp3" + '"' + " alias temp_alias";
+                mciSendString("close temp_alias", null, 0, 0);
+                mciSendString(sCmd, null, 0, 0);
+                if (Parameters.g_bPlayMusic == false)
+                {
+                    mciSendString("play temp_alias repeat", null, 0, 0);
+                    Parameters.g_bPlayMusic = true;
+                }
+                else if (Parameters.g_bPlayMusic == true)
+                {
+                    mciSendString("close temp_alias ", null, 0, 0);
+                    Parameters.g_bPlayMusic = false;
+                }
             }
-            else if (Parameters.g_bPlayMusic == true)
+            catch (Exception ex)
             {
-                mciSendString("close temp_alias ", null, 0, 0);
-                Parameters.g_bPlayMusic = false;
+
             }
         }
 
@@ -165,10 +172,12 @@ namespace AEDemo
         public static bool ShowLayerProperty(frmLayerProperty frm, ILayer Layer)
         {
             bool bResult = false;
-            IFeatureLayer pFeaLayer = Layer as IFeatureLayer;
-            IFeatureClass pFeaClass = pFeaLayer.FeatureClass;
+            IFeatureLayer pFeaLayer = null;
+            IFeatureClass pFeaClass = null;
             try
             {
+                pFeaLayer = Layer as IFeatureLayer;
+                pFeaClass = pFeaLayer.FeatureClass;
                 //// 获取字段个数
                 int iFieldCount = pFeaClass.Fields.FieldCount;
 
@@ -193,13 +202,13 @@ namespace AEDemo
                 dt.Columns.Add("长度：");
                 dt.Columns.Add("精度：");
 
-                for (int i = 0; i < iFieldCount;i++ )
+                for (int i = 0; i < iFieldCount; i++)
                 {
                     DataRow dr = dt.NewRow();
-                    dr["名称："]=pFeaClass.Fields.get_Field(i).Name;
-                    dr["别名："]=pFeaClass.Fields.get_Field(i).AliasName;
-                    dr["类型："]=pFeaClass.Fields.get_Field(i).Type;
-                    dr["长度："]=pFeaClass.Fields.get_Field(i).Length;
+                    dr["名称："] = pFeaClass.Fields.get_Field(i).Name;
+                    dr["别名："] = pFeaClass.Fields.get_Field(i).AliasName;
+                    dr["类型："] = pFeaClass.Fields.get_Field(i).Type;
+                    dr["长度："] = pFeaClass.Fields.get_Field(i).Length;
                     dr["精度："] = pFeaClass.Fields.get_Field(i).Precision;
                     dt.Rows.Add(dr);
                 }
@@ -231,24 +240,31 @@ namespace AEDemo
         {
             frm.gcFieldInfo.DataSource = null;
             bool bResult = false;
-            IFeatureLayer pFeaLayer = Layer as IFeatureLayer;
-            IFeatureClass pFeaClass = pFeaLayer.FeatureClass;
-            IFeatureCursor pFeaCursor = pFeaClass.Search(null, false);
-            IFeature pFea = pFeaCursor.NextFeature();
-            int iFieldCount = pFeaClass.Fields.FieldCount;
+            IFeatureLayer pFeaLayer = null;
+            IFeatureClass pFeaClass = null;
+            IFeatureCursor pFeaCursor = null;
+            IFeature pFea = null;
+            int iFieldCount = 0;
             DataTable dt = new DataTable();
+
             try
             {
-                for (int i = 0; i < iFieldCount;i++ )
+                pFeaLayer = Layer as IFeatureLayer;
+                pFeaClass = pFeaLayer.FeatureClass;
+                pFeaCursor = pFeaClass.Search(null, false);
+                pFea = pFeaCursor.NextFeature();
+                iFieldCount = pFeaClass.Fields.FieldCount;
+
+                for (int i = 0; i < iFieldCount; i++)
                 {
                     string sFieldName = pFeaClass.Fields.get_Field(i).Name;
                     dt.Columns.Add(sFieldName);
                 }
 
-                while(pFea!=null)
+                while (pFea != null)
                 {
                     DataRow dr = dt.NewRow();
-                    for (int i = 0; i < iFieldCount;i++ )
+                    for (int i = 0; i < iFieldCount; i++)
                     {
                         if (pFeaClass.Fields.get_Field(i).Type == esriFieldType.esriFieldTypeGeometry)
                         {
@@ -280,7 +296,7 @@ namespace AEDemo
                 frm.gcFieldInfo.DataSource = dt;
                 frm.gvFieldInfo.PopulateColumns();
                 frm.gvFieldInfo.BestFitColumns();
-                
+
                 bResult = true;
             }
             catch (Exception ex)
@@ -305,22 +321,35 @@ namespace AEDemo
         /// <param name="frm"></param>
         /// <param name="frmMain"></param>
         /// <returns></returns>
-        public static bool FlashShape(frmPropertyDetails frm,frmFrame frmMain)
+        public static bool FlashShape(frmPropertyDetails frm, frmFrame frmMain)
         {
             bool bResult = false;
-            //// 获取当前在树节点中选中的图层
-            TreeListNode node = frm.tlLayer.FocusedNode;
-            int iLayerIndex = Convert.ToInt32(node.GetDisplayText(1));
-            ILayer pLayer = Parameters.g_pMapControl.get_Layer(iLayerIndex);
-
-            IFeatureLayer pFeaLayer = pLayer as IFeatureLayer;
-            IFeatureClass pFeaClass = pFeaLayer.FeatureClass;
-            IFeatureCursor pFeaCursor=null;
-            IFeature pFea=null;
+            ILayer pLayer = null;
+            IFeatureLayer pFeaLayer = null; ;
+            IFeatureClass pFeaClass = null; ;
+            IFeatureCursor pFeaCursor = null;
+            IFeature pFea = null;
             IQueryFilter pQueryFilter = new QueryFilterClass();
 
-            try 
+            try
             {
+                //// 获取当前在树节点中选中的图层
+                TreeListNode node = frm.tlLayer.FocusedNode;
+                string sLayerName = node.GetDisplayText(0).Trim();
+
+                //// 根据图层名来获取图层
+                for (int i = 0; i < Parameters.g_iLayerCount; i++)
+                {
+                    pLayer = Parameters.g_pMapControl.get_Layer(i);
+                    if (pLayer.Name.Equals(sLayerName))
+                    {
+                        break;
+                    }
+                }
+
+                pFeaLayer = pLayer as IFeatureLayer;
+                pFeaClass = pFeaLayer.FeatureClass;
+
                 //// 获得选中的行记录
                 DataRow dr = frm.gvFieldInfo.GetFocusedDataRow();
                 //// 获得OID字段在该数据集中的名称，是叫FID 还是 OBJECTID
@@ -329,7 +358,7 @@ namespace AEDemo
                 string sOIDValue = dr[sOIDName].ToString();
 
                 string sQuery = "" + sOIDName + " = " + sOIDValue + "";
-               
+
                 pQueryFilter.WhereClause = sQuery;
 
                 //// 根据唯一编号的ObjectID 或者 FID，查询出来的要素也是唯一的
@@ -359,9 +388,11 @@ namespace AEDemo
                 frmMain.axMapControl1.Extent = pEnvlope;
                 //frmMain.axMapControl1.CenterAt(pPoint);
                 
+               // IGeometry pGeo = IGeometry(pFea);
+
                 bResult = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 WriteLog("闪烁显示要素失败：", ex.ToString());
                 bResult = false;

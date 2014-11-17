@@ -59,21 +59,27 @@
             this.缩放到图层ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图层属性ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.axMapControlEagelEye = new ESRI.ArcGIS.Controls.AxMapControl();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.axToolbarControl1 = new ESRI.ArcGIS.Controls.AxToolbarControl();
+            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
+            this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
+            this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axMapControlEagelEye)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axToolbarControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
+            this.dockPanel1.SuspendLayout();
+            this.dockPanel1_Container.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axMapControl2)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -304,7 +310,6 @@
             this.splitContainerControl1.Name = "splitContainerControl1";
             this.splitContainerControl1.Panel1.Controls.Add(this.axTOCControl1);
             this.splitContainerControl1.Panel1.Text = "Panel1";
-            this.splitContainerControl1.Panel2.Controls.Add(this.axMapControlEagelEye);
             this.splitContainerControl1.Panel2.Controls.Add(this.axLicenseControl1);
             this.splitContainerControl1.Panel2.Controls.Add(this.axMapControl1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
@@ -378,15 +383,6 @@
             this.图层属性ToolStripMenuItem.Text = "图层属性";
             this.图层属性ToolStripMenuItem.Click += new System.EventHandler(this.图层属性ToolStripMenuItem_Click);
             // 
-            // axMapControlEagelEye
-            // 
-            this.axMapControlEagelEye.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.axMapControlEagelEye.Location = new System.Drawing.Point(477, 259);
-            this.axMapControlEagelEye.Name = "axMapControlEagelEye";
-            this.axMapControlEagelEye.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControlEagelEye.OcxState")));
-            this.axMapControlEagelEye.Size = new System.Drawing.Size(275, 252);
-            this.axMapControlEagelEye.TabIndex = 2;
-            // 
             // axLicenseControl1
             // 
             this.axLicenseControl1.Enabled = true;
@@ -401,7 +397,7 @@
             this.axMapControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.axMapControl1.Location = new System.Drawing.Point(-1, 3);
+            this.axMapControl1.Location = new System.Drawing.Point(-1, 0);
             this.axMapControl1.Name = "axMapControl1";
             this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
             this.axMapControl1.Size = new System.Drawing.Size(756, 511);
@@ -454,6 +450,52 @@
             this.axToolbarControl1.Size = new System.Drawing.Size(296, 28);
             this.axToolbarControl1.TabIndex = 3;
             // 
+            // dockManager1
+            // 
+            this.dockManager1.Form = this;
+            this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
+            this.dockPanel1});
+            this.dockManager1.TopZIndexControls.AddRange(new string[] {
+            "DevExpress.XtraBars.BarDockControl",
+            "DevExpress.XtraBars.StandaloneBarDockControl",
+            "System.Windows.Forms.StatusBar",
+            "DevExpress.XtraBars.Ribbon.RibbonStatusBar",
+            "DevExpress.XtraBars.Ribbon.RibbonControl"});
+            // 
+            // dockPanel1
+            // 
+            this.dockPanel1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(245)))), ((int)(((byte)(241)))));
+            this.dockPanel1.Appearance.Options.UseBackColor = true;
+            this.dockPanel1.Controls.Add(this.dockPanel1_Container);
+            this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Float;
+            this.dockPanel1.FloatLocation = new System.Drawing.Point(713, 438);
+            this.dockPanel1.FloatSize = new System.Drawing.Size(275, 250);
+            this.dockPanel1.ID = new System.Guid("a7dad13d-c86a-4201-848b-de62b340cc0d");
+            this.dockPanel1.Location = new System.Drawing.Point(0, 0);
+            this.dockPanel1.Name = "dockPanel1";
+            this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
+            this.dockPanel1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Right;
+            this.dockPanel1.SavedIndex = 0;
+            this.dockPanel1.Size = new System.Drawing.Size(275, 250);
+            this.dockPanel1.Text = "鹰眼";
+            // 
+            // dockPanel1_Container
+            // 
+            this.dockPanel1_Container.Controls.Add(this.axMapControl2);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(2, 24);
+            this.dockPanel1_Container.Name = "dockPanel1_Container";
+            this.dockPanel1_Container.Size = new System.Drawing.Size(271, 224);
+            this.dockPanel1_Container.TabIndex = 0;
+            // 
+            // axMapControl2
+            // 
+            this.axMapControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.axMapControl2.Location = new System.Drawing.Point(0, 0);
+            this.axMapControl2.Name = "axMapControl2";
+            this.axMapControl2.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl2.OcxState")));
+            this.axMapControl2.Size = new System.Drawing.Size(271, 224);
+            this.axMapControl2.TabIndex = 0;
+            // 
             // frmFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -473,11 +515,14 @@
             this.splitContainerControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.axMapControlEagelEye)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axToolbarControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
+            this.dockPanel1.ResumeLayout(false);
+            this.dockPanel1_Container.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axMapControl2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -506,7 +551,6 @@
         public ESRI.ArcGIS.Controls.AxMapControl axMapControl1;
         public ESRI.ArcGIS.Controls.AxToolbarControl axToolbarControl1;
         public ESRI.ArcGIS.Controls.AxTOCControl axTOCControl1;
-        public ESRI.ArcGIS.Controls.AxMapControl axMapControlEagelEye;
         private DevExpress.XtraBars.BarButtonItem btnPlayMusic;
         private DevExpress.XtraBars.BarButtonItem btnLayerProperty;
         private DevExpress.XtraBars.BarButtonItem btnPropertyDetails;
@@ -518,6 +562,10 @@
         private System.Windows.Forms.ToolStripMenuItem 图层属性ToolStripMenuItem;
         private DevExpress.XtraBars.BarButtonItem btnQuery;
         private DevExpress.XtraBars.BarButtonItem btnSpatialQuery;
+        private DevExpress.XtraBars.Docking.DockManager dockManager1;
+        private DevExpress.XtraBars.Docking.DockPanel dockPanel1;
+        private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
+        public ESRI.ArcGIS.Controls.AxMapControl axMapControl2;
 
     }
 }

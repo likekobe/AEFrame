@@ -34,3 +34,15 @@ C:\Users\like\Desktop\AEDEMO\AEDemo\obj\x86\Debug\AEDemo.frmShowLog.resources
 C:\Users\like\Desktop\AEDEMO\AEDemo\obj\x86\Debug\AEDemo.Properties.Resources.resources
 C:\Users\like\Desktop\AEDEMO\AEDemo\obj\x86\Debug\AEDemo.csproj.GenerateResource.Cache
 C:\Users\like\Desktop\AEDEMO\AEDemo\obj\x86\Debug\AEDemo.exe.licenses
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.pdb
+E:\Github\AEFrame\AEDemo\bin\x86\Debug\AEDemo.exe
+E:\Github\AEFrame\AEDemo\bin\x86\Debug\AEDemo.pdb
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmFrame.resources
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmLayerProperty.resources
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmPropertyDetails.resources
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmShowLog.resources
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.Properties.Resources.resources
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.csproj.GenerateResource.Cache
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe.licenses

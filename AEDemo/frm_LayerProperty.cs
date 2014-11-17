@@ -18,7 +18,15 @@ namespace AEDemo
             InitializeComponent();
             CboLoadLayer();
             cboLayer.SelectedIndex = 0;
-            CommFunction.ShowLayerProperty(this,Parameters.g_pMapControl.get_Layer(0));
+            CommFunction.ShowLayerProperty(this, Parameters.g_pMapControl.get_Layer(0));
+        }
+
+        public frmLayerProperty(ILayer Layer)
+        {
+            InitializeComponent();
+            cboLayer.Text = Layer.Name;
+            cboLayer.Properties.ReadOnly = true;
+            CommFunction.ShowLayerProperty(this, Layer);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -31,12 +39,18 @@ namespace AEDemo
         /// </summary>
         private void CboLoadLayer()
         {
-
-            int iLayerCount = Parameters.g_pMapControl.LayerCount;
-            for (int i = 0; i < iLayerCount; i++)
+            try
             {
-                ILayer pLayer = Parameters.g_pMapControl.get_Layer(i);
-                cboLayer.Properties.Items.Add(pLayer.Name);
+                int iLayerCount = Parameters.g_pMapControl.LayerCount;
+                for (int i = 0; i < iLayerCount; i++)
+                {
+                    ILayer pLayer = Parameters.g_pMapControl.get_Layer(i);
+                    cboLayer.Properties.Items.Add(pLayer.Name);
+                }
+            }
+            catch(Exception ex)
+            {
+            
             }
         }
 
