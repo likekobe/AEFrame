@@ -13,6 +13,7 @@ using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.Geodatabase;
 using DevExpress.XtraBars.Docking;
+using ESRI.ArcGIS.CatalogUI;
 
 namespace AEDemo
 {
@@ -173,8 +174,8 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnAddLog_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            
-        }
+       
+        } 
         #endregion
 
         #region 查看属性
@@ -443,7 +444,24 @@ namespace AEDemo
             
             }
 
-        } 
+        }
+
+        private void 设置空间参考ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IProjectedCoordinateSystem pSpatialReference;
+                ISpatialReferenceDialog pDialog = new SpatialReferenceDialogClass();
+                pSpatialReference = pDialog.DoModalCreate(true, false, false, 0) as IProjectedCoordinateSystem;
+                this.axMapControl1.Map.SpatialReference = pSpatialReference;
+                this.axMapControl1.Refresh();
+            }
+            catch(Exception ex)
+            {
+            
+            }
+
+        }
         #endregion
 
         #region 关闭窗体事件
@@ -494,6 +512,8 @@ namespace AEDemo
             }
         }
         #endregion
+
+      
 
  
 

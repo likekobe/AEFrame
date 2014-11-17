@@ -67,6 +67,7 @@
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
+            this.设置空间参考ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
@@ -339,15 +340,16 @@
             this.移除图层ToolStripMenuItem,
             this.缩放到图层ToolStripMenuItem,
             this.选择ToolStripMenuItem,
-            this.图层属性ToolStripMenuItem});
+            this.图层属性ToolStripMenuItem,
+            this.设置空间参考ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 158);
             // 
             // 浏览属性ToolStripMenuItem
             // 
             this.浏览属性ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("浏览属性ToolStripMenuItem.Image")));
             this.浏览属性ToolStripMenuItem.Name = "浏览属性ToolStripMenuItem";
-            this.浏览属性ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.浏览属性ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.浏览属性ToolStripMenuItem.Text = "浏览属性";
             this.浏览属性ToolStripMenuItem.Click += new System.EventHandler(this.浏览属性ToolStripMenuItem_Click);
             // 
@@ -355,7 +357,7 @@
             // 
             this.移除图层ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("移除图层ToolStripMenuItem.Image")));
             this.移除图层ToolStripMenuItem.Name = "移除图层ToolStripMenuItem";
-            this.移除图层ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.移除图层ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.移除图层ToolStripMenuItem.Text = "移除图层";
             this.移除图层ToolStripMenuItem.Click += new System.EventHandler(this.移除图层ToolStripMenuItem_Click);
             // 
@@ -363,7 +365,7 @@
             // 
             this.缩放到图层ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("缩放到图层ToolStripMenuItem.Image")));
             this.缩放到图层ToolStripMenuItem.Name = "缩放到图层ToolStripMenuItem";
-            this.缩放到图层ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.缩放到图层ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.缩放到图层ToolStripMenuItem.Text = "缩放到图层";
             this.缩放到图层ToolStripMenuItem.Click += new System.EventHandler(this.缩放到图层ToolStripMenuItem_Click);
             // 
@@ -371,7 +373,7 @@
             // 
             this.选择ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("选择ToolStripMenuItem.Image")));
             this.选择ToolStripMenuItem.Name = "选择ToolStripMenuItem";
-            this.选择ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.选择ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.选择ToolStripMenuItem.Text = "选择";
             this.选择ToolStripMenuItem.Click += new System.EventHandler(this.选择ToolStripMenuItem_Click);
             // 
@@ -379,7 +381,7 @@
             // 
             this.图层属性ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("图层属性ToolStripMenuItem.Image")));
             this.图层属性ToolStripMenuItem.Name = "图层属性ToolStripMenuItem";
-            this.图层属性ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.图层属性ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.图层属性ToolStripMenuItem.Text = "图层属性";
             this.图层属性ToolStripMenuItem.Click += new System.EventHandler(this.图层属性ToolStripMenuItem_Click);
             // 
@@ -496,6 +498,14 @@
             this.axMapControl2.Size = new System.Drawing.Size(271, 224);
             this.axMapControl2.TabIndex = 0;
             // 
+            // 设置空间参考ToolStripMenuItem
+            // 
+            this.设置空间参考ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("设置空间参考ToolStripMenuItem.Image")));
+            this.设置空间参考ToolStripMenuItem.Name = "设置空间参考ToolStripMenuItem";
+            this.设置空间参考ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.设置空间参考ToolStripMenuItem.Text = "设置空间参考";
+            this.设置空间参考ToolStripMenuItem.Click += new System.EventHandler(this.设置空间参考ToolStripMenuItem_Click);
+            // 
             // frmFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -566,6 +576,7 @@
         private DevExpress.XtraBars.Docking.DockPanel dockPanel1;
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
         public ESRI.ArcGIS.Controls.AxMapControl axMapControl2;
+        private System.Windows.Forms.ToolStripMenuItem 设置空间参考ToolStripMenuItem;
 
     }
 }

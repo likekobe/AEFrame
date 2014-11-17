@@ -174,15 +174,23 @@ namespace AEDemo
             bool bResult = false;
             IFeatureLayer pFeaLayer = null;
             IFeatureClass pFeaClass = null;
+            IGeoDataset pGeoDataset;
+            ISpatialReference pSpatialReference;
+
             try
             {
                 pFeaLayer = Layer as IFeatureLayer;
                 pFeaClass = pFeaLayer.FeatureClass;
+                pGeoDataset = pFeaLayer as IGeoDataset;
+                pSpatialReference = pGeoDataset.SpatialReference;
+
                 //// 获取字段个数
                 int iFieldCount = pFeaClass.Fields.FieldCount;
 
                 frm.listData.Items.Clear();
                 frm.listData.Items.Add("图层别名：    " + pFeaClass.AliasName);
+                frm.listData.Items.Add(" ");
+                frm.listData.Items.Add("空间参考：    " + pSpatialReference.Name);
                 frm.listData.Items.Add(" ");
                 frm.listData.Items.Add("几何类型：    " + pFeaClass.ShapeType);
                 frm.listData.Items.Add(" ");
@@ -387,8 +395,8 @@ namespace AEDemo
 
                 frmMain.axMapControl1.Extent = pEnvlope;
                 //frmMain.axMapControl1.CenterAt(pPoint);
-                
-               // IGeometry pGeo = IGeometry(pFea);
+
+                // IGeometry pGeo = IGeometry(pFea);
 
                 bResult = true;
             }
