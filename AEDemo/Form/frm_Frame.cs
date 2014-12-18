@@ -88,7 +88,7 @@ namespace AEDemo
         {
             if (dockPanel1.Visibility == DockVisibility.Hidden)
             {
-                
+
                 dockPanel1.Visibility = DockVisibility.Visible;
                 //axMapControlEagelEye.Visible = true;
             }
@@ -174,8 +174,8 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnAddLog_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-       
-        } 
+
+        }
         #endregion
 
         #region 查看属性
@@ -323,8 +323,6 @@ namespace AEDemo
                     {
                         CommFunction.WriteLog("获得鼠标点下的图层失败：", ex.ToString());
                     }
-
-
                 }
             }
         }
@@ -418,9 +416,9 @@ namespace AEDemo
                 this.axMapControl1.Refresh();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-            
+
             }
         }
 
@@ -439,9 +437,9 @@ namespace AEDemo
                 }
                 this.axMapControl1.Refresh();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-            
+
             }
 
         }
@@ -456,28 +454,28 @@ namespace AEDemo
                 this.axMapControl1.Map.SpatialReference = pSpatialReference;
                 this.axMapControl1.Refresh();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-            
+
             }
 
         }
         #endregion
 
         #region 关闭窗体事件
-        /// <summary>
-        /// 按下Esc退出
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //// ！！！！！！点击Esc退出窗体后，会报错： 尝试读取或写入受保护的内存。这通常指示其他内存已损坏。
-        private void frmFrame_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                ShowCloseFormTips();
-            }
-        }
+        ///// <summary>
+        ///// 按下Esc退出
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        ////// ！！！！！！点击Esc退出窗体后，会报错： 尝试读取或写入受保护的内存。这通常指示其他内存已损坏。
+        //private void frmFrame_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if(e.KeyCode==Keys.Escape)
+        //    {
+        //        this.Close();
+        //    }
+        //}
 
         /// <summary>
         /// 退出按钮
@@ -486,7 +484,7 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnEsc_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ShowCloseFormTips();
+            this.Close();
         }
 
         /// <summary>
@@ -494,28 +492,149 @@ namespace AEDemo
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// 
-        // ！！！！！！！！！！！有问题啊，点击否 窗体还是会关闭
-        //private void frmFrame_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    ShowCloseFormTips();
-        //}
+        private void frmFrame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ShowCloseFormTips(e);
+        }
 
         /// <summary>
         /// 关闭主界面给出提示
         /// </summary>
-        private void ShowCloseFormTips()
+        private void ShowCloseFormTips(FormClosingEventArgs e)
         {
             if (MessageBox.Show("     确定要退出系统？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                this.Dispose();
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;
             }
         }
         #endregion
 
+        #region  显示要素图层的Tip 需要改，这里写死了
+        /// <summary>
+        /// 显示要素图层Tip,这里显示的是jmd图层的NAME字段值（写死的）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void axMapControl1_OnMouseMove(object sender, IMapControlEvents2_OnMouseMoveEvent e)
+        {
+            ILayer pLayer=null;
+
+            for (int i = 0; i < this.axMapControl1.Map.LayerCount;i++ )
+            {
+                if(this.axMapControl1.Map.get_Layer(i).Name.Equals("jmd"))
+                {
+                    pLayer = this.axMapControl1.Map.get_Layer(i);
+                    break;
+                }
+            }
+
+            IFeatureLayer pFeaLayer = pLayer as IFeatureLayer;
+            IActiveView pActiveView = this.axMapControl1.ActiveView;
+            pFeaLayer.DisplayField = "NAME";
+            pFeaLayer.ShowTips = true;
+            string sTip = string.Empty;
+
+            sTip = pFeaLayer.get_TipText(e.mapX, e.mapY, pActiveView.FullExtent.Width / 100);
+            
+            toolTip1.SetToolTip(axMapControl1, sTip);
+
+        }
+        #endregion
+
+        #region 编辑 目前错误的，还报Bug
+        /// <summary>
+        /// 启动编辑
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnStartEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            btnStartEdit.Enabled = false;
+            btnStopEdit.Enabled = true;
+            btnSaveEdit.Enabled = true;
+            btnOperationLayer.Enabled = true;
+            btnOperationTask.Enabled = true;
+
+            ////    图层加载到combobox
+            try
+            {
+                int iLayerCount = Parameters.g_pMapControl.LayerCount;
+                cboOperationTask.Items.Clear();
+
+                for (int i = 0; i < iLayerCount; i++)
+                {
+                    ILayer pLayer = Parameters.g_pMapControl.get_Layer(i);
+                    cboOperationLayer.Items.Add(pLayer.Name);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 停止编辑
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnStopEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            btnStartEdit.Enabled = true;
+            btnStopEdit.Enabled = false;
+            btnSaveEdit.Enabled = false;
+
+            btnOperationLayer.Enabled = false;
+            btnOperationTask.Enabled = false;
+         
+        }
+
+        /// <summary>
+        /// 保存编辑
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSaveEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+           
+        }
+
+        private void cboOperationTask_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboOperationLayer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string sLayerName = (sender as ComboBoxEdit).SelectedText.ToString();
+            Edit.Add(sLayerName, this);
+        }
+        #endregion
+
+
       
 
- 
+     
+
+     
+
+      
+
+     
+
+     
+
+
+
+
+
+
+
+
 
     }
 }

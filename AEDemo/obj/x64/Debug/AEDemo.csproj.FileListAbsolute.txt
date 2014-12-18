@@ -7,3 +7,8 @@ E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\AEDemo.csproj.GenerateResource.Cache
 E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\AEDemo.exe.licenses
 E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\AEDemo.exe
 E:\LIKE\AEDemo\AEDemo\obj\x64\Debug\AEDemo.pdb
+E:\Github\AEFrame\AEDemo\obj\x64\Debug\Interop.CELL50Lib.dll
+E:\Github\AEFrame\AEDemo\obj\x64\Debug\AxInterop.CELL50Lib.dll
+E:\Github\AEFrame\AEDemo\obj\x64\Debug\AEDemo.csproj.ResolveComReference.cache
+E:\Github\AEFrame\AEDemo\obj\x64\Debug\AEDemo.exe
+E:\Github\AEFrame\AEDemo\obj\x64\Debug\AEDemo.pdb

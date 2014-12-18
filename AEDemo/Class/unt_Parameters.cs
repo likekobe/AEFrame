@@ -10,6 +10,12 @@ namespace AEDemo
 {
     class Parameters
     {
+
+        /// <summary>
+        /// 音乐播放状态标识符
+        /// </summary>
+        public static bool g_bPlayMusic = false;
+
         /// <summary>
         /// 地图控件
         /// </summary>
@@ -85,10 +91,15 @@ namespace AEDemo
         }
 
         /// <summary>
-        /// 音乐播放状态标识符
+        /// 报表文件夹路径
         /// </summary>
-        public static bool g_bPlayMusic = false;
-   
+        public static string g_sCellPath
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().Location + "\\..\\..\\rep\\";
+            }
+        }
 
         /// <summary>
         /// 系统时间

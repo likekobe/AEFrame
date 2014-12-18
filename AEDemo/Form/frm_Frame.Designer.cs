@@ -44,6 +44,13 @@
             this.btnPropertyDetails = new DevExpress.XtraBars.BarButtonItem();
             this.btnQuery = new DevExpress.XtraBars.BarButtonItem();
             this.btnSpatialQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnOperationTask = new DevExpress.XtraBars.BarEditItem();
+            this.cboOperationTask = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.btnOperationLayer = new DevExpress.XtraBars.BarEditItem();
+            this.cboOperationLayer = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.btnStartEdit = new DevExpress.XtraBars.BarButtonItem();
+            this.btnStopEdit = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSaveEdit = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -51,6 +58,10 @@
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -59,6 +70,7 @@
             this.缩放到图层ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图层属性ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.设置空间参考ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.imageCollection = new DevExpress.Utils.ImageCollection(this.components);
@@ -67,8 +79,12 @@
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
-            this.设置空间参考ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboOperationTask)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboOperationLayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).BeginInit();
@@ -103,15 +119,26 @@
             this.btnLayerProperty,
             this.btnPropertyDetails,
             this.btnQuery,
-            this.btnSpatialQuery});
+            this.btnSpatialQuery,
+            this.btnOperationTask,
+            this.btnOperationLayer,
+            this.btnStartEdit,
+            this.btnStopEdit,
+            this.btnSaveEdit});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 22;
+            this.ribbonControl1.MaxItemId = 29;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnPlayMusic);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
             this.ribbonPage2,
-            this.ribbonPage3});
+            this.ribbonPage3,
+            this.ribbonPage4});
+            this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.cboOperationTask,
+            this.cboOperationLayer,
+            this.repositoryItemComboBox1,
+            this.repositoryItemComboBox2});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2007;
             this.ribbonControl1.SelectedPage = this.ribbonPage1;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
@@ -250,6 +277,71 @@
             this.btnSpatialQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnSpatialQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSpatialQuery_ItemClick);
             // 
+            // btnOperationTask
+            // 
+            this.btnOperationTask.Caption = "编辑任务:  ";
+            this.btnOperationTask.Edit = this.cboOperationTask;
+            this.btnOperationTask.Enabled = false;
+            this.btnOperationTask.Id = 24;
+            this.btnOperationTask.Name = "btnOperationTask";
+            this.btnOperationTask.Width = 150;
+            // 
+            // cboOperationTask
+            // 
+            this.cboOperationTask.AutoHeight = false;
+            this.cboOperationTask.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboOperationTask.Items.AddRange(new object[] {
+            "新建图形"});
+            this.cboOperationTask.Name = "cboOperationTask";
+            this.cboOperationTask.SelectedIndexChanged += new System.EventHandler(this.cboOperationTask_SelectedIndexChanged);
+            // 
+            // btnOperationLayer
+            // 
+            this.btnOperationLayer.Caption = "编辑图层:  ";
+            this.btnOperationLayer.Edit = this.cboOperationLayer;
+            this.btnOperationLayer.Enabled = false;
+            this.btnOperationLayer.Id = 25;
+            this.btnOperationLayer.Name = "btnOperationLayer";
+            this.btnOperationLayer.Width = 150;
+            // 
+            // cboOperationLayer
+            // 
+            this.cboOperationLayer.AutoHeight = false;
+            this.cboOperationLayer.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboOperationLayer.Name = "cboOperationLayer";
+            this.cboOperationLayer.SelectedIndexChanged += new System.EventHandler(this.cboOperationLayer_SelectedIndexChanged);
+            // 
+            // btnStartEdit
+            // 
+            this.btnStartEdit.Caption = "启动编辑";
+            this.btnStartEdit.Id = 26;
+            this.btnStartEdit.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnStartEdit.LargeGlyph")));
+            this.btnStartEdit.LargeWidth = 85;
+            this.btnStartEdit.Name = "btnStartEdit";
+            this.btnStartEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnStartEdit_ItemClick);
+            // 
+            // btnStopEdit
+            // 
+            this.btnStopEdit.Caption = "停止编辑";
+            this.btnStopEdit.Enabled = false;
+            this.btnStopEdit.Id = 27;
+            this.btnStopEdit.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnStopEdit.LargeGlyph")));
+            this.btnStopEdit.LargeWidth = 85;
+            this.btnStopEdit.Name = "btnStopEdit";
+            this.btnStopEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnStopEdit_ItemClick);
+            // 
+            // btnSaveEdit
+            // 
+            this.btnSaveEdit.Caption = "保存编辑";
+            this.btnSaveEdit.Enabled = false;
+            this.btnSaveEdit.Id = 28;
+            this.btnSaveEdit.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("btnSaveEdit.LargeGlyph")));
+            this.btnSaveEdit.LargeWidth = 85;
+            this.btnSaveEdit.Name = "btnSaveEdit";
+            this.btnSaveEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveEdit_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -302,6 +394,37 @@
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "查询";
             // 
+            // ribbonPage4
+            // 
+            this.ribbonPage4.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup5});
+            this.ribbonPage4.Name = "ribbonPage4";
+            this.ribbonPage4.Text = "编辑";
+            // 
+            // ribbonPageGroup5
+            // 
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnStartEdit);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnStopEdit);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnSaveEdit);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnOperationTask);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnOperationLayer);
+            this.ribbonPageGroup5.Name = "ribbonPageGroup5";
+            this.ribbonPageGroup5.Text = "编辑";
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
+            // 
+            // repositoryItemComboBox2
+            // 
+            this.repositoryItemComboBox2.AutoHeight = false;
+            this.repositoryItemComboBox2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox2.Name = "repositoryItemComboBox2";
+            // 
             // splitContainerControl1
             // 
             this.splitContainerControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -343,13 +466,13 @@
             this.图层属性ToolStripMenuItem,
             this.设置空间参考ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 158);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 136);
             // 
             // 浏览属性ToolStripMenuItem
             // 
             this.浏览属性ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("浏览属性ToolStripMenuItem.Image")));
             this.浏览属性ToolStripMenuItem.Name = "浏览属性ToolStripMenuItem";
-            this.浏览属性ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.浏览属性ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.浏览属性ToolStripMenuItem.Text = "浏览属性";
             this.浏览属性ToolStripMenuItem.Click += new System.EventHandler(this.浏览属性ToolStripMenuItem_Click);
             // 
@@ -357,7 +480,7 @@
             // 
             this.移除图层ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("移除图层ToolStripMenuItem.Image")));
             this.移除图层ToolStripMenuItem.Name = "移除图层ToolStripMenuItem";
-            this.移除图层ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.移除图层ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.移除图层ToolStripMenuItem.Text = "移除图层";
             this.移除图层ToolStripMenuItem.Click += new System.EventHandler(this.移除图层ToolStripMenuItem_Click);
             // 
@@ -365,7 +488,7 @@
             // 
             this.缩放到图层ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("缩放到图层ToolStripMenuItem.Image")));
             this.缩放到图层ToolStripMenuItem.Name = "缩放到图层ToolStripMenuItem";
-            this.缩放到图层ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.缩放到图层ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.缩放到图层ToolStripMenuItem.Text = "缩放到图层";
             this.缩放到图层ToolStripMenuItem.Click += new System.EventHandler(this.缩放到图层ToolStripMenuItem_Click);
             // 
@@ -373,7 +496,7 @@
             // 
             this.选择ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("选择ToolStripMenuItem.Image")));
             this.选择ToolStripMenuItem.Name = "选择ToolStripMenuItem";
-            this.选择ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.选择ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.选择ToolStripMenuItem.Text = "选择";
             this.选择ToolStripMenuItem.Click += new System.EventHandler(this.选择ToolStripMenuItem_Click);
             // 
@@ -381,9 +504,17 @@
             // 
             this.图层属性ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("图层属性ToolStripMenuItem.Image")));
             this.图层属性ToolStripMenuItem.Name = "图层属性ToolStripMenuItem";
-            this.图层属性ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.图层属性ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.图层属性ToolStripMenuItem.Text = "图层属性";
             this.图层属性ToolStripMenuItem.Click += new System.EventHandler(this.图层属性ToolStripMenuItem_Click);
+            // 
+            // 设置空间参考ToolStripMenuItem
+            // 
+            this.设置空间参考ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("设置空间参考ToolStripMenuItem.Image")));
+            this.设置空间参考ToolStripMenuItem.Name = "设置空间参考ToolStripMenuItem";
+            this.设置空间参考ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.设置空间参考ToolStripMenuItem.Text = "设置空间参考";
+            this.设置空间参考ToolStripMenuItem.Click += new System.EventHandler(this.设置空间参考ToolStripMenuItem_Click);
             // 
             // axLicenseControl1
             // 
@@ -406,6 +537,7 @@
             this.axMapControl1.TabIndex = 0;
             this.axMapControl1.OnExtentUpdated += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnExtentUpdatedEventHandler(this.axMapControl1_OnExtentUpdated);
             this.axMapControl1.OnMouseDown += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseDownEventHandler(this.axMapControl1_OnMouseDown);
+            this.axMapControl1.OnMouseMove += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseMoveEventHandler(this.axMapControl1_OnMouseMove);
             this.axMapControl1.OnMouseUp += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseUpEventHandler(this.axMapControl1_OnMouseUp);
             // 
             // imageCollection
@@ -470,7 +602,7 @@
             this.dockPanel1.Appearance.Options.UseBackColor = true;
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Float;
-            this.dockPanel1.FloatLocation = new System.Drawing.Point(713, 438);
+            this.dockPanel1.FloatLocation = new System.Drawing.Point(672, 574);
             this.dockPanel1.FloatSize = new System.Drawing.Size(275, 250);
             this.dockPanel1.ID = new System.Guid("a7dad13d-c86a-4201-848b-de62b340cc0d");
             this.dockPanel1.Location = new System.Drawing.Point(0, 0);
@@ -498,14 +630,6 @@
             this.axMapControl2.Size = new System.Drawing.Size(271, 224);
             this.axMapControl2.TabIndex = 0;
             // 
-            // 设置空间参考ToolStripMenuItem
-            // 
-            this.设置空间参考ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("设置空间参考ToolStripMenuItem.Image")));
-            this.设置空间参考ToolStripMenuItem.Name = "设置空间参考ToolStripMenuItem";
-            this.设置空间参考ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.设置空间参考ToolStripMenuItem.Text = "设置空间参考";
-            this.设置空间参考ToolStripMenuItem.Click += new System.EventHandler(this.设置空间参考ToolStripMenuItem_Click);
-            // 
             // frmFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -519,8 +643,12 @@
             this.Name = "frmFrame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ArcEngine Frame";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmFrame_KeyDown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmFrame_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboOperationTask)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboOperationLayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).EndInit();
@@ -577,6 +705,18 @@
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
         public ESRI.ArcGIS.Controls.AxMapControl axMapControl2;
         private System.Windows.Forms.ToolStripMenuItem 设置空间参考ToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cboOperationTask;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cboOperationLayer;
+        private DevExpress.XtraBars.BarEditItem btnOperationTask;
+        private DevExpress.XtraBars.BarEditItem btnOperationLayer;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
+        private DevExpress.XtraBars.BarButtonItem btnStartEdit;
+        private DevExpress.XtraBars.BarButtonItem btnStopEdit;
+        private DevExpress.XtraBars.BarButtonItem btnSaveEdit;
 
     }
 }

@@ -15,7 +15,6 @@ namespace AEDemo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //frmFrame frmMain = new frmFrame();
             Application.Run(new frmFrame());
         }
     }

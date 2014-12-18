@@ -46,3 +46,10 @@ E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmShowLog.resources
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.Properties.Resources.resources
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.csproj.GenerateResource.Cache
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe.licenses
+E:\Github\AEFrame\AEDemo\bin\x86\Debug\Interop.CELL50Lib.dll
+E:\Github\AEFrame\AEDemo\bin\x86\Debug\AxInterop.CELL50Lib.dll
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\Interop.CELL50Lib.dll
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AxInterop.CELL50Lib.dll
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.csproj.ResolveComReference.cache
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmCellBase.resources
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmLoadReport.resources

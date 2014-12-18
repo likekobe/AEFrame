@@ -113,42 +113,60 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frm_Frame.cs">
+    <Compile Include="Form\Cell\frm_CellBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Frame.Designer.cs">
+    <Compile Include="Form\Cell\frm_CellBase.Designer.cs">
+      <DependentUpon>frm_CellBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frm_Frame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frm_Frame.Designer.cs">
       <DependentUpon>frm_Frame.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_LayerProperty.cs">
+    <Compile Include="Form\frm_LayerProperty.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_LayerProperty.Designer.cs">
+    <Compile Include="Form\frm_LayerProperty.Designer.cs">
       <DependentUpon>frm_LayerProperty.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_PropertyDetails.cs">
+    <Compile Include="Form\Cell\frm_LoadReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_PropertyDetails.Designer.cs">
+    <Compile Include="Form\Cell\frm_LoadReport.Designer.cs">
+      <DependentUpon>frm_LoadReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frm_PropertyDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frm_PropertyDetails.Designer.cs">
       <DependentUpon>frm_PropertyDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_ShowLog.cs">
+    <Compile Include="Form\Log\frm_ShowLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_ShowLog.Designer.cs">
+    <Compile Include="Form\Log\frm_ShowLog.Designer.cs">
       <DependentUpon>frm_ShowLog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frm_Frame.resx">
+    <EmbeddedResource Include="Form\Cell\frm_CellBase.resx">
+      <DependentUpon>frm_CellBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frm_Frame.resx">
       <DependentUpon>frm_Frame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_LayerProperty.resx">
+    <EmbeddedResource Include="Form\frm_LayerProperty.resx">
       <DependentUpon>frm_LayerProperty.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_PropertyDetails.resx">
+    <EmbeddedResource Include="Form\Cell\frm_LoadReport.resx">
+      <DependentUpon>frm_LoadReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frm_PropertyDetails.resx">
       <DependentUpon>frm_PropertyDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_ShowLog.resx">
+    <EmbeddedResource Include="Form\Log\frm_ShowLog.resx">
       <DependentUpon>frm_ShowLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -170,9 +188,32 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="unt_CommFunction.cs" />
-    <Compile Include="unt_OperateFile.cs" />
-    <Compile Include="unt_Parameters.cs" />
+    <Compile Include="Class\unt_CommFunction.cs" />
+    <Compile Include="Class\unt_OperateFile.cs" />
+    <Compile Include="Class\unt_Parameters.cs" />
+    <Compile Include="Class\unt_Edit.cs" />
+    <Compile Include="Class\Logic\unt_LogicLoadReport.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxCELL50Lib">
+      <Guid>{7802D41A-28B0-43C4-95EA-17B7E32337D1}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="CELL50Lib">
+      <Guid>{7802D41A-28B0-43C4-95EA-17B7E32337D1}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Class\Method\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

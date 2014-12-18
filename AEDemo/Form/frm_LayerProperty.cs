@@ -42,6 +42,7 @@ namespace AEDemo
             try
             {
                 int iLayerCount = Parameters.g_pMapControl.LayerCount;
+
                 for (int i = 0; i < iLayerCount; i++)
                 {
                     ILayer pLayer = Parameters.g_pMapControl.get_Layer(i);
