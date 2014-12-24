@@ -354,7 +354,7 @@ namespace AEDemo
                         break;
                     }
                 }
-
+                
                 pFeaLayer = pLayer as IFeatureLayer;
                 pFeaClass = pFeaLayer.FeatureClass;
 

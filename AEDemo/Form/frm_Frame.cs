@@ -235,7 +235,9 @@ namespace AEDemo
 
         private void btnSpatialQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            frmBuffer frm = new frmBuffer();
+            frm.TopMost = true;
+            frm.Show();
         }
         #endregion
 
@@ -253,6 +255,37 @@ namespace AEDemo
                 axMapControl1.MousePointer = esriControlsMousePointer.esriPointerHand;
                 axMapControl1.Pan();
             }
+
+            IPoint pt = new PointClass();
+            pt.X = e.x;
+            pt.Y = e.y;
+
+            Parameters.g_StartPoint = pt;
+
+
+            /* 鼠标点选生成缓冲区
+            IMap pMap = axMapControl1.Map;
+            IActiveView pActView = pMap as IActiveView;
+            IPoint pt = pActView.ScreenDisplay.DisplayTransformation.ToMapPoint(e.x, e.y);
+            ITopologicalOperator pTopo = pt as ITopologicalOperator;
+            IGeometry pGeo = pTopo.Buffer(50);
+
+            IRgbColor pRgbColor = new RgbColorClass();
+            pRgbColor.Red = 255;
+
+            IColor pColor = pRgbColor;
+            ISimpleFillSymbol pSimleFillSymbol = new SimpleFillSymbolClass();
+            pSimleFillSymbol.Color = pColor;
+            ISymbol pSymbol = pSimleFillSymbol as ISymbol;
+
+            pActView.ScreenDisplay.SetSymbol(pSymbol);
+            pActView.ScreenDisplay.DrawPolygon(pGeo);
+            pMap.SelectByShape(pGeo, null, false);
+
+            //// 让缓冲区闪烁
+            //axMapControl1.FlashShape(pGeo, 1000, 2, pSymbol);
+            axMapControl1.ActiveView.Refresh();
+             */
         }
 
         //// MapControl中，在使用其它工具后，会使鼠标滚轮缩放失效，可以通过加入MouseDown或MouseUp事件让地图获得焦点，使此功能持续有效。
@@ -260,6 +293,12 @@ namespace AEDemo
         private void axMapControl1_OnMouseUp(object sender, IMapControlEvents2_OnMouseUpEvent e)
         {
             axMapControl1.Focus();
+
+            IPoint pt = new PointClass();
+            pt.X = e.x;
+            pt.Y = e.y;
+
+            Parameters.g_EndPoint = pt;
         }
         #endregion
 
@@ -343,6 +382,7 @@ namespace AEDemo
                     ILayer pLayer = null;
                     System.Object Other = null;
                     System.Object Index = null;
+
                     //// 获得鼠标点坐标下的图层
                     Parameters.g_pTOCControl.HitTest(e.x, e.y, ref Item, ref pBasicMap, ref pLayer, ref Other, ref Index);
                     IMap pMap = axMapControl1.ActiveView.FocusMap;

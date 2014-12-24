@@ -5,11 +5,16 @@ using System.Text;
 using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.Carto;
 using System.Reflection;
+using ESRI.ArcGIS.Geometry;
 
 namespace AEDemo
 {
     class Parameters
     {
+
+        public static IPoint g_StartPoint;
+
+        public static IPoint g_EndPoint;
 
         /// <summary>
         /// 音乐播放状态标识符

@@ -68,11 +68,11 @@ namespace AEDemo
                     frmCell.LoadForm();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
-        
+
         }
 
         /// <summary>
@@ -108,8 +108,8 @@ namespace AEDemo
                 }
             }
             catch (Exception ex)
-            { 
-                
+            {
+
             }
         }
 

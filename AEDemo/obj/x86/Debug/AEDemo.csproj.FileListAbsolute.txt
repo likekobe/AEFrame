@@ -53,3 +53,5 @@ E:\Github\AEFrame\AEDemo\obj\x86\Debug\AxInterop.CELL50Lib.dll
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.csproj.ResolveComReference.cache
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmCellBase.resources
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmLoadReport.resources
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmBuffer.resources
+E:\Github\AEFrame\AEDemo\bin\x86\Debug\GxAEHelper.dll
