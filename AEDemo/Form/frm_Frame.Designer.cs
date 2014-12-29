@@ -140,7 +140,7 @@
             this.repositoryItemComboBox1,
             this.repositoryItemComboBox2});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2007;
-            this.ribbonControl1.SelectedPage = this.ribbonPage1;
+            this.ribbonControl1.SelectedPage = this.ribbonPage3;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
             this.ribbonControl1.Size = new System.Drawing.Size(969, 145);
             this.ribbonControl1.Toolbar.ItemLinks.Add(this.btnOpenMxd, "打开文件");
@@ -269,7 +269,7 @@
             // 
             // btnSpatialQuery
             // 
-            this.btnSpatialQuery.Caption = "空间查询";
+            this.btnSpatialQuery.Caption = "缓冲区查询";
             this.btnSpatialQuery.Glyph = ((System.Drawing.Image)(resources.GetObject("btnSpatialQuery.Glyph")));
             this.btnSpatialQuery.Id = 21;
             this.btnSpatialQuery.LargeWidth = 85;
@@ -602,7 +602,7 @@
             this.dockPanel1.Appearance.Options.UseBackColor = true;
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Float;
-            this.dockPanel1.FloatLocation = new System.Drawing.Point(672, 574);
+            this.dockPanel1.FloatLocation = new System.Drawing.Point(746, 558);
             this.dockPanel1.FloatSize = new System.Drawing.Size(275, 250);
             this.dockPanel1.ID = new System.Guid("a7dad13d-c86a-4201-848b-de62b340cc0d");
             this.dockPanel1.Location = new System.Drawing.Point(0, 0);

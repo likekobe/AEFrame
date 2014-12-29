@@ -235,9 +235,15 @@ namespace AEDemo
 
         private void btnSpatialQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            frmBuffer frm = new frmBuffer();
-            frm.TopMost = true;
-            frm.Show();
+            if (!CommFunction.IsSelectFeature())
+            {
+                MessageBox.Show("请先选择要素。");
+            }
+            else
+            {
+                frmBufferQuery frm = new frmBufferQuery();
+                frm.Show();
+            }
         }
         #endregion
 

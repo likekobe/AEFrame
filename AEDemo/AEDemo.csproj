@@ -153,19 +153,19 @@
     <Compile Include="Form\Log\frm_ShowLog.Designer.cs">
       <DependentUpon>frm_ShowLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\frm_Buffer.cs">
+    <Compile Include="Form\frm_BufferQuery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\frm_Buffer.Designer.cs">
-      <DependentUpon>frm_Buffer.cs</DependentUpon>
+    <Compile Include="Form\frm_BufferQuery.Designer.cs">
+      <DependentUpon>frm_BufferQuery.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\Cell\frm_CellBase.resx">
       <DependentUpon>frm_CellBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\frm_Buffer.resx">
-      <DependentUpon>frm_Buffer.cs</DependentUpon>
+    <EmbeddedResource Include="Form\frm_BufferQuery.resx">
+      <DependentUpon>frm_BufferQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frm_Frame.resx">
       <DependentUpon>frm_Frame.cs</DependentUpon>

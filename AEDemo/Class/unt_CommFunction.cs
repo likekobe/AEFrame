@@ -33,6 +33,44 @@ namespace AEDemo
         [DllImport("winmm.dll")]
         private static extern uint mciSendString(string lpstrCommand, string lpstrReturnString, uint uReturnLength, uint hWndCallback);
 
+
+        /// <summary>
+        /// 判断当前是否选中要素
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsSelectFeature()
+        {
+            bool bResult=false;
+
+            try
+            {
+                ISelection pSelection = Parameters.g_pMapControl.Map.FeatureSelection;
+                IEnumFeatureSetup pEnumFeatureSetup = pSelection as IEnumFeatureSetup;
+                pEnumFeatureSetup.AllFields = true;
+
+                IEnumFeature pEnumFeature = pEnumFeatureSetup as IEnumFeature;
+                pEnumFeature.Reset();
+                IFeature pFea = pEnumFeature.Next();
+
+                if (pFea == null)
+                {
+                    bResult = false;
+                }
+                else
+                {
+                    bResult = true;
+                }
+            }
+            catch(Exception ex)
+            {
+                bResult = false;
+            }
+
+            return bResult;
+        }
+
+
+
         /// <summary>
         /// 写入日志文件
         /// </summary>
