@@ -19,11 +19,15 @@ namespace AEDemo
 {
     public partial class frmFrame : DevExpress.XtraEditors.XtraForm
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public frmFrame()
         {
             InitializeComponent();
             dockPanel1.Visibility = DockVisibility.Visible;
-            CommFunction.PlayMusic();
+            FolderInitialization.CreateFolder();
+            MusicOperation.PlayMusic();
         }
 
         /// <summary>
@@ -33,10 +37,10 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnPlayMusic_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            CommFunction.PlayMusic();
+            MusicOperation.PlayMusic();
         }
 
-        #region 文件操作
+        #region 打开、保存文件操作
         /// <summary>
         /// 打开Mxd文件
         /// </summary>
@@ -44,7 +48,7 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnOpenMxd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OperateFile.OpenFile(this);
+            FileOperation.OpenMxd(this);
         }
 
         /// <summary>
@@ -54,7 +58,7 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnAddData_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OperateFile.AddShapeFile(this);
+            FileOperation.AddShapeFile(this);
         }
 
         /// <summary>
@@ -64,7 +68,7 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OperateFile.SaveDocument(this);
+            FileOperation.SaveDocument(this);
         }
 
         /// <summary>
@@ -74,11 +78,12 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnSaveAs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OperateFile.SaveAsDocument(this);
+            FileOperation.SaveAsDocument(this);
         }
         #endregion
 
         #region 鹰眼
+
         /// <summary>
         /// 打开或关闭鹰眼界面
         /// </summary>
@@ -88,14 +93,11 @@ namespace AEDemo
         {
             if (dockPanel1.Visibility == DockVisibility.Hidden)
             {
-
                 dockPanel1.Visibility = DockVisibility.Visible;
-                //axMapControlEagelEye.Visible = true;
             }
             else
             {
                 dockPanel1.Visibility = DockVisibility.Hidden;
-                //axMapControlEagelEye.Visible = false;
             }
         }
 
@@ -106,45 +108,53 @@ namespace AEDemo
         /// <param name="e"></param>
         private void axMapControl1_OnExtentUpdated(object sender, IMapControlEvents2_OnExtentUpdatedEvent e)
         {
-            //// 得到新范围
-            IEnvelope pEnv = e.newEnvelope as IEnvelope;
-            IGraphicsContainer pGraphicsContainer = axMapControl2.Map as IGraphicsContainer;
-            IActiveView pActiveView = pGraphicsContainer as IActiveView;
+            try
+            {
+                //// 得到新范围
+                IEnvelope pEnv = e.newEnvelope as IEnvelope;
+                IGraphicsContainer pGraphicsContainer = axMapControl2.Map as IGraphicsContainer;
+                IActiveView pActiveView = pGraphicsContainer as IActiveView;
 
-            //// 绘制新的矩形框前，清除Map对象中的任何图形元素
-            pGraphicsContainer.DeleteAllElements();
-            IRectangleElement pRectangleEle = new RectangleElementClass();
-            IElement pEle = pRectangleEle as IElement;
-            pEle.Geometry = pEnv;
+                //// 绘制新的矩形框前，清除Map对象中的任何图形元素
+                pGraphicsContainer.DeleteAllElements();
+                IRectangleElement pRectangleEle = new RectangleElementClass();
+                IElement pEle = pRectangleEle as IElement;
+                pEle.Geometry = pEnv;
 
-            IRgbColor pColor = new RgbColorClass();
-            pColor.RGB = 255;
-            pColor.Transparency = 255;
+                IRgbColor pColor = new RgbColorClass();
+                pColor.RGB = 255;
+                pColor.Transparency = 255;
 
-            //// 产生一个线符号
-            ILineSymbol pOutLine = new SimpleLineSymbolClass();
-            pOutLine.Width = 1;
-            pOutLine.Color = pColor;
+                //// 产生一个线符号
+                ILineSymbol pOutLine = new SimpleLineSymbolClass();
+                pOutLine.Width = 1;
+                pOutLine.Color = pColor;
 
-            //// 设置颜色属性
-            pColor = new RgbColorClass();
-            pColor.RGB = 255;
-            pColor.Transparency = 0;
+                //// 设置颜色属性
+                pColor = new RgbColorClass();
+                pColor.RGB = 255;
+                pColor.Transparency = 0;
 
-            //// 设置填充符号的属性
-            IFillSymbol pFillSymbol = new SimpleFillSymbolClass();
-            pFillSymbol.Color = pColor;
-            pFillSymbol.Outline = pOutLine;
-            IFillShapeElement pFillShapeEle = pEle as IFillShapeElement;
-            pFillShapeEle.Symbol = pFillSymbol;
-            pEle = pFillShapeEle as IElement;
-            pGraphicsContainer.AddElement(pEle, 0);
-            pActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
-
+                //// 设置填充符号的属性
+                IFillSymbol pFillSymbol = new SimpleFillSymbolClass();
+                pFillSymbol.Color = pColor;
+                pFillSymbol.Outline = pOutLine;
+                IFillShapeElement pFillShapeEle = pEle as IFillShapeElement;
+                pFillShapeEle.Symbol = pFillSymbol;
+                pEle = pFillShapeEle as IElement;
+                pGraphicsContainer.AddElement(pEle, 0);
+                pActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+            }
+            catch(Exception ex)
+            {
+                LogOperation.WriteLog("鹰眼地图同步移动失败", ex.ToString());
+            }
         }
+
         #endregion
 
-        #region 日志操作
+        #region 显示、手动填写 日志
+
         /// <summary>
         /// 显示日志
         /// </summary>
@@ -174,8 +184,9 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnAddLog_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            ////TODO：新增添加日志窗体，可以手动增加日志
         }
+
         #endregion
 
         #region 查看属性
@@ -225,17 +236,29 @@ namespace AEDemo
                 }
             }
         }
+
         #endregion
 
         #region 属性查询功能
+
+        /// <summary>
+        /// 要素属性查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            ////TODO：要素属性查询
         }
 
+        /// <summary>
+        /// 缓冲区查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSpatialQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (!CommFunction.IsSelectFeature())
+            if (!LayerOperation.IsSelectFeature())
             {
                 MessageBox.Show("请先选择要素。");
             }
@@ -245,9 +268,11 @@ namespace AEDemo
                 frm.Show();
             }
         }
+
         #endregion
 
         #region 按下鼠标中键实现拖动
+
         /// <summary>
         /// 鼠标按下事件
         /// </summary>
@@ -261,37 +286,6 @@ namespace AEDemo
                 axMapControl1.MousePointer = esriControlsMousePointer.esriPointerHand;
                 axMapControl1.Pan();
             }
-
-            IPoint pt = new PointClass();
-            pt.X = e.x;
-            pt.Y = e.y;
-
-            Parameters.g_StartPoint = pt;
-
-
-            /* 鼠标点选生成缓冲区
-            IMap pMap = axMapControl1.Map;
-            IActiveView pActView = pMap as IActiveView;
-            IPoint pt = pActView.ScreenDisplay.DisplayTransformation.ToMapPoint(e.x, e.y);
-            ITopologicalOperator pTopo = pt as ITopologicalOperator;
-            IGeometry pGeo = pTopo.Buffer(50);
-
-            IRgbColor pRgbColor = new RgbColorClass();
-            pRgbColor.Red = 255;
-
-            IColor pColor = pRgbColor;
-            ISimpleFillSymbol pSimleFillSymbol = new SimpleFillSymbolClass();
-            pSimleFillSymbol.Color = pColor;
-            ISymbol pSymbol = pSimleFillSymbol as ISymbol;
-
-            pActView.ScreenDisplay.SetSymbol(pSymbol);
-            pActView.ScreenDisplay.DrawPolygon(pGeo);
-            pMap.SelectByShape(pGeo, null, false);
-
-            //// 让缓冲区闪烁
-            //axMapControl1.FlashShape(pGeo, 1000, 2, pSymbol);
-            axMapControl1.ActiveView.Refresh();
-             */
         }
 
         //// MapControl中，在使用其它工具后，会使鼠标滚轮缩放失效，可以通过加入MouseDown或MouseUp事件让地图获得焦点，使此功能持续有效。
@@ -299,16 +293,11 @@ namespace AEDemo
         private void axMapControl1_OnMouseUp(object sender, IMapControlEvents2_OnMouseUpEvent e)
         {
             axMapControl1.Focus();
-
-            IPoint pt = new PointClass();
-            pt.X = e.x;
-            pt.Y = e.y;
-
-            Parameters.g_EndPoint = pt;
         }
         #endregion
 
         #region 图层树操作,实现拖动图层
+
         /// <summary>
         /// 图层树的MouseDown事件
         /// </summary>
@@ -366,7 +355,7 @@ namespace AEDemo
                     }
                     catch (Exception ex)
                     {
-                        CommFunction.WriteLog("获得鼠标点下的图层失败：", ex.ToString());
+                        LogOperation.WriteLog("获得鼠标点下的图层失败：", ex.ToString());
                     }
                 }
             }
@@ -417,9 +406,11 @@ namespace AEDemo
                 }
             }
         }
+
         #endregion
 
         #region 图层树右键操作
+
         private void 浏览属性ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmPropertyDetails frm = new frmPropertyDetails(Parameters.g_pSelectedLayer);
@@ -464,7 +455,7 @@ namespace AEDemo
             }
             catch (Exception ex)
             {
-
+                LogOperation.WriteLog("缩放到选中图层失败", ex.ToString());
             }
         }
 
@@ -485,7 +476,7 @@ namespace AEDemo
             }
             catch (Exception ex)
             {
-
+                LogOperation.WriteLog("选中图层失败", ex.ToString());
             }
 
         }
@@ -502,27 +493,13 @@ namespace AEDemo
             }
             catch (Exception ex)
             {
-
+                LogOperation.WriteLog("设置空间参考失败", ex.ToString());
             }
 
         }
         #endregion
 
         #region 关闭窗体事件
-        ///// <summary>
-        ///// 按下Esc退出
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        ////// ！！！！！！点击Esc退出窗体后，会报错： 尝试读取或写入受保护的内存。这通常指示其他内存已损坏。
-        //private void frmFrame_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if(e.KeyCode==Keys.Escape)
-        //    {
-        //        this.Close();
-        //    }
-        //}
-
         /// <summary>
         /// 退出按钮
         /// </summary>
@@ -567,6 +544,8 @@ namespace AEDemo
         /// <param name="e"></param>
         private void axMapControl1_OnMouseMove(object sender, IMapControlEvents2_OnMouseMoveEvent e)
         {
+            ////TODO：设置图层显示的Tips
+
             ILayer pLayer=null;
 
             for (int i = 0; i < this.axMapControl1.Map.LayerCount;i++ )
@@ -599,6 +578,7 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnStartEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            ////TODO：图层的编辑功能未实现
             btnStartEdit.Enabled = false;
             btnStopEdit.Enabled = true;
             btnSaveEdit.Enabled = true;
@@ -660,27 +640,6 @@ namespace AEDemo
             Edit.Add(sLayerName, this);
         }
         #endregion
-
-
-      
-
-     
-
-     
-
-      
-
-     
-
-     
-
-
-
-
-
-
-
-
 
     }
 }

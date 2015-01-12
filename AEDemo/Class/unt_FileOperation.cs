@@ -15,14 +15,14 @@ namespace AEDemo
     /// <summary>
     /// 文件操作的类，入打开、保存、添加数据等操作
     /// </summary>
-    class OperateFile
+    class FileOperation
     {
         /// <summary>
         /// 打开Mxd文件
         /// </summary>
         /// <param name="frm">主窗体</param>
         /// <returns></returns>
-        public static bool OpenFile(frmFrame frm)
+        public static bool OpenMxd(frmFrame frm)
         {
             bool bResult = false;
 
@@ -63,20 +63,19 @@ namespace AEDemo
                         LoadEagleEye(frm);
                         frm.axMapControl1.Extent = frm.axMapControl1.FullExtent;
                         frm.axMapControl1.Refresh();
-                        CommFunction.WriteLog(OpenDlg.Title, "打开地图文档成功。 地图文档路径：" + sFilePath);
                         bResult = true;
                     }
                     else
                     {
                         MessageBox.Show(sFilePath + "不是有效的地图文档。");
-                        CommFunction.WriteLog(OpenDlg.Title, "打开地图文档失败，不是有效的地图文档。");
+                        LogOperation.WriteLog(OpenDlg.Title, "打开地图文档失败，不是有效的地图文档。");
                         bResult = false;
                     }
                 }
             }
             catch(Exception ex)
             {
-            
+                LogOperation.WriteLog("打开地图文档失败",ex.ToString());
             }
 
             return bResult;
@@ -93,6 +92,8 @@ namespace AEDemo
                 OpenFileDialog OpenDlg = new OpenFileDialog();
                 OpenDlg.Title = "打开图层文件";
                 OpenDlg.Filter = "Shape文件(*shp)|*shp";
+
+                ////    支持文件多选
                 OpenDlg.Multiselect = true;
 
                 if (OpenDlg.ShowDialog() == DialogResult.OK)
@@ -119,7 +120,7 @@ namespace AEDemo
             }
             catch(Exception ex)
             {
-            
+                LogOperation.WriteLog("添加Shape文件失败", ex.ToString());
             }
         }
 
@@ -150,7 +151,7 @@ namespace AEDemo
             }
             catch(Exception ex)
             {
-            
+                LogOperation.WriteLog("显示鹰眼失败", ex.ToString());
             }
             return bResult;
 
@@ -176,7 +177,7 @@ namespace AEDemo
             }
             catch(Exception ex)
             {
-            
+                LogOperation.WriteLog("设置鹰眼显示中心点失败", ex.ToString());
             }
         }
 
@@ -201,14 +202,14 @@ namespace AEDemo
                     else
                     {
                         Parameters.g_pMapDoc.Save(Parameters.g_pMapDoc.UsesRelativePaths, true);
-                        CommFunction.WriteLog("保存地图文档成功", "保存地图文档成功。 地图文档路径：" + Parameters.g_sDocPath);
+                        LogOperation.WriteLog("保存地图文档成功", "保存地图文档成功。 地图文档路径：" + Parameters.g_sDocPath);
                         MessageBox.Show("保存地图文档成功。");
                     }
                 }
             }
             catch (Exception ex)
             {
-                CommFunction.WriteLog("保存地图文档失败", ex.ToString());
+                LogOperation.WriteLog("保存地图文档失败", ex.ToString());
             }
         }
 
@@ -250,24 +251,18 @@ namespace AEDemo
                             else
                             {
                                 Parameters.g_pMapDoc.SaveAs(sSavePath, true, true);
-                                CommFunction.WriteLog("另存为地图文档成功", "另存为地图文档成功。 地图文档另存为路径：" + sSavePath);
+                                LogOperation.WriteLog("另存为地图文档成功", "另存为地图文档成功。 地图文档另存为路径：" + sSavePath);
                                 MessageBox.Show("另存为地图文档成功。");
                             }
                         }
-
                     }
-
                 }
             }
             catch (Exception ex)
             {
-                CommFunction.WriteLog("保存地图文档失败", ex.ToString());
-
+                LogOperation.WriteLog("保存地图文档失败", ex.ToString());
             }
         }
-
-
-
 
     }
 }

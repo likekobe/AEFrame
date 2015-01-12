@@ -11,22 +11,32 @@ using ESRI.ArcGIS.Controls;
 
 namespace AEDemo
 {
+    /// <summary>
+    /// 显示图层属性信息
+    /// </summary>
     public partial class frmLayerProperty : DevExpress.XtraEditors.XtraForm
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public frmLayerProperty()
         {
             InitializeComponent();
             CboLoadLayer();
             cboLayer.SelectedIndex = 0;
-            CommFunction.ShowLayerProperty(this, Parameters.g_pMapControl.get_Layer(0));
+            LayerOperation.ShowLayerProperty(this, Parameters.g_pMapControl.get_Layer(0));
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="Layer"></param>
         public frmLayerProperty(ILayer Layer)
         {
             InitializeComponent();
             cboLayer.Text = Layer.Name;
             cboLayer.Properties.ReadOnly = true;
-            CommFunction.ShowLayerProperty(this, Layer);
+            LayerOperation.ShowLayerProperty(this, Layer);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -51,7 +61,7 @@ namespace AEDemo
             }
             catch(Exception ex)
             {
-            
+                LogOperation.WriteLog("显示图层属性信息时，ComboBox中加载图层名称失败", ex.ToString());
             }
         }
 
@@ -64,7 +74,7 @@ namespace AEDemo
         {
             int iLayerIndex = cboLayer.SelectedIndex;
             ILayer pLayer = Parameters.g_pMapControl.get_Layer(iLayerIndex);
-            CommFunction.ShowLayerProperty(this, pLayer);
+            LayerOperation.ShowLayerProperty(this, pLayer);
         }
 
     }

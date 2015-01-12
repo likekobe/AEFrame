@@ -12,21 +12,30 @@ using ESRI.ArcGIS.Geodatabase;
 
 namespace AEDemo
 {
+    /// <summary>
+    /// 显示图层下要素的详细属性
+    /// </summary>
     public partial class frmPropertyDetails : DevExpress.XtraEditors.XtraForm
     {
-
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public frmPropertyDetails()
         {
             InitializeComponent();
             TreeListLoadLayer();
-            CommFunction.ShowPropertyDetails(this, Parameters.g_pMapControl.get_Layer(0));
+            LayerOperation.ShowPropertyDetails(this, Parameters.g_pMapControl.get_Layer(0));
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="Layer">图层</param>
         public frmPropertyDetails(ILayer Layer)
         {
             InitializeComponent();
             tlLayer.AppendNode(new object[] { Layer.Name, 0 }, null);
-            CommFunction.ShowPropertyDetails(this, Layer);
+            LayerOperation.ShowPropertyDetails(this, Layer);
         }
 
         /// <summary>
@@ -45,7 +54,7 @@ namespace AEDemo
             }
             catch(Exception ex)
             {
-            
+                LogOperation.WriteLog("显示图层下要素的详细属性时，TreeList中加载图层名称失败", ex.ToString());
             }
         }
 
@@ -63,11 +72,11 @@ namespace AEDemo
                 string sLayerName = node.GetDisplayText(0);
                 ILayer pLayer = Parameters.g_pMapControl.get_Layer(iLayerIndex);
                 labelLayerName.Text = "图层 【" + sLayerName + "】 属性表";
-                CommFunction.ShowPropertyDetails(this, pLayer);
+                LayerOperation.ShowPropertyDetails(this, pLayer);
             }
             catch(Exception ex)
             {
-            
+                LogOperation.WriteLog("显示图层下要素的详细属性时，TreeList中切换选中节点，显示要素详情失败", ex.ToString());
             }
         }
 
@@ -86,7 +95,7 @@ namespace AEDemo
                 //// 判断光标是否在行内  
                 if (gridHitInfo.InRow)
                 {
-                    CommFunction.FlashShape(this, (frmFrame)this.Owner);
+                    LayerOperation.FlashShape(this, (frmFrame)this.Owner);
                 }
             }
         }

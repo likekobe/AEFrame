@@ -159,6 +159,12 @@
     <Compile Include="Form\frm_BufferQuery.Designer.cs">
       <DependentUpon>frm_BufferQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frm_ShowTips.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frm_ShowTips.Designer.cs">
+      <DependentUpon>frm_ShowTips.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\Cell\frm_CellBase.resx">
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frm_PropertyDetails.resx">
       <DependentUpon>frm_PropertyDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frm_ShowTips.resx">
+      <DependentUpon>frm_ShowTips.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Log\frm_ShowLog.resx">
       <DependentUpon>frm_ShowLog.cs</DependentUpon>
@@ -201,11 +210,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Class\unt_CommFunction.cs" />
-    <Compile Include="Class\unt_OperateFile.cs" />
+    <Compile Include="Class\unt_LayerOperation.cs" />
+    <Compile Include="Class\unt_FileOperation.cs" />
     <Compile Include="Class\unt_Parameters.cs" />
     <Compile Include="Class\unt_Edit.cs" />
     <Compile Include="Class\Logic\unt_LogicLoadReport.cs" />
+    <Compile Include="Class\unt_LogOperation.cs" />
+    <Compile Include="Class\unt_MusicOperation.cs" />
+    <Compile Include="Class\unt_FolderInitialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AxCELL50Lib">

@@ -9,13 +9,11 @@ using ESRI.ArcGIS.Geometry;
 
 namespace AEDemo
 {
+    /// <summary>
+    /// 系统参数
+    /// </summary>
     class Parameters
     {
-
-        public static IPoint g_StartPoint;
-
-        public static IPoint g_EndPoint;
-
         /// <summary>
         /// 音乐播放状态标识符
         /// </summary>
@@ -24,43 +22,74 @@ namespace AEDemo
         /// <summary>
         /// 地图控件
         /// </summary>
-        public static IMapControl2 g_pMapControl;
+        public static IMapControl2 g_pMapControl
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 地图文档
         /// </summary>
-        public static IMapDocument g_pMapDoc;
-
+        public static IMapDocument g_pMapDoc
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// 图层树
         /// </summary>
-        public static ITOCControl g_pTOCControl;
+        public static ITOCControl g_pTOCControl
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 拖动的图层
         /// </summary>
-        public static ILayer g_pMoveLayer;
+        public static ILayer g_pMoveLayer
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 鼠标点坐标下的图层
         /// </summary>
-        public static ILayer g_pSelectedLayer;
+        public static ILayer g_pSelectedLayer
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 目标图层索引
         /// </summary>
-        public static int g_iToIndex;
+        public static int g_iToIndex
+        {
+            get;
+            set;
+        }
    
         /// <summary>
         /// 地图文档的路径
         /// </summary>
-        public static string g_sDocPath;
+        public static string g_sDocPath
+        {
+            get;
+            set;
+        }
     
 
         /// <summary>
         /// 图层个数
         /// </summary>
-        public static int g_iLayerCount;
+        public static int g_iLayerCount
+        {
+            get;
+            set;
+        }
  
         /// <summary>
         /// exe可执行文件路径

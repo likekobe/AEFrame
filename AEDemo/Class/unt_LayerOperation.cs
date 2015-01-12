@@ -16,24 +16,10 @@ using ESRI.ArcGIS.Geometry;
 namespace AEDemo
 {
     /// <summary>
-    /// 公共方法的类
+    /// 图层、要素操作
     /// </summary>
-    class CommFunction
+    class LayerOperation
     {
-        //private static uint SND_ASYNC = 0x0001;
-        //private static uint SND_FILENAME = 0x00020000;
-        /// <summary>
-        /// mciSendString用于播放音乐
-        /// </summary>
-        /// <param name="lpstrCommand">要发送的命令字符串。字符串结构是:[命令][设备别名][命令参数]</param>
-        /// <param name="lpstrReturnString">返回信息的缓冲区,为一指定了大小的字符串变量.</param>
-        /// <param name="uReturnLength">缓冲区的大小,就是字符变量的长度.</param>
-        /// <param name="hWndCallback">回调方式，一般设为零</param>
-        /// <returns></returns>
-        [DllImport("winmm.dll")]
-        private static extern uint mciSendString(string lpstrCommand, string lpstrReturnString, uint uReturnLength, uint hWndCallback);
-
-
         /// <summary>
         /// 判断当前是否选中要素
         /// </summary>
@@ -63,143 +49,11 @@ namespace AEDemo
             }
             catch(Exception ex)
             {
+                LogOperation.WriteLog("判断当前是否选中要素失败", ex.ToString());
                 bResult = false;
             }
 
             return bResult;
-        }
-
-
-
-        /// <summary>
-        /// 写入日志文件
-        /// </summary>
-        /// <param name="LogName">日志名</param>
-        /// <param name="LogContent">日志内容</param>
-        /// <returns></returns>
-        public static bool WriteLog(string LogName, string LogContent)
-        {
-            bool bResult = false;
-            try
-            {
-                //DateTime dateTime = System.DateTime.Now;
-                string sTime = Parameters.g_DateTime.GetDateTimeFormats('s')[0].ToString();
-                sTime = sTime.Replace(":", "").ToString();
-                LogName = LogName + "(" + sTime + ").log";
-                string sPath = Parameters.g_sLogPath + LogName;
-
-                StreamWriter streamWrite = null;
-                streamWrite = new StreamWriter(sPath, false);
-                streamWrite.WriteLine(LogContent);
-                streamWrite.Close();        ////    一定要写这一行，不然写入不了
-                bResult = true;
-            }
-            catch (Exception ex)
-            {
-                WriteLog("写入日志失败", ex.ToString());
-                bResult = false;
-            }
-
-            return bResult;
-
-        }
-
-        /// <summary>
-        /// 显示日志
-        /// </summary>
-        /// <param name="Path">日志文件夹路径</param>
-        /// <returns></returns>
-        public static bool ShowLog(frmShowLog frm)
-        {
-            bool bResult = false;
-            try
-            {
-                DirectoryInfo dir = new DirectoryInfo(Parameters.g_sLogPath);
-                FileInfo[] files = dir.GetFiles();
-                FileAttributes fileAttributes;
-
-                //// 遍历所有文件
-                foreach (FileInfo file in files)
-                {
-                    if (file.Extension == ".log")
-                    {
-                        //// 忽略隐藏文件
-                        fileAttributes = file.Attributes & FileAttributes.Hidden;
-                        if (fileAttributes != FileAttributes.Hidden)
-                        {
-                            FileStream fs = new FileStream(file.FullName, FileMode.Open);
-                            StreamReader reader = new StreamReader(fs, Encoding.UTF8);
-
-                            //// 循环读取文件
-                            string sSum = string.Empty;
-                            while (true)
-                            {
-                                string str = reader.ReadLine();
-                                if (str == null)
-                                {
-                                    break;
-                                }
-                                else if (str.Trim() == "")
-                                {
-                                    continue;
-                                }
-                                else
-                                {
-                                    //// 这里就是每行数据了  你可以进行处理 取出符合要求的行
-                                    sSum = sSum + str;
-                                }
-                            }
-
-                            frm.treeListShowLog.AppendNode(new object[] { file, sSum }, null);
-                        }
-                    }
-                }
-
-                bResult = true;
-            }
-            catch (Exception ex)
-            {
-                WriteLog("显示日志失败", ex.ToString());
-                bResult = false;
-            }
-            return bResult;
-
-        }
-
-        /// <summary>
-        /// 播放音乐
-        /// </summary>
-        /// <param name="Play">是否正在播放的标识</param>
-        public static void PlayMusic()
-        {
-
-
-            //string sCmd = @"open ""E:\LIKE\AEDemo\AEDemo\bin\x86\bgm\安妮的仙境(annie's w'onderland).mp3"" alias temp_alias";
-
-            //// ？？？？？怎么设置相对路径啊，格式总写不对
-            //// ！！！！！格式问题搞定啦，sCmd就是命令
-            //mciSendString(@"open ""E:\LIKE\AEDemo\AEDemo\bin\x86\bgm\安妮的仙境(annie's w'onderland).mp3"" alias temp_alias", null, 0, 0);
-
-            try
-            {
-                string sCmd = "open " + '"' + Parameters.g_sBgmPath + "安妮的仙境(annie's w'onderland).mp3" + '"' + " alias temp_alias";
-                mciSendString("close temp_alias", null, 0, 0);
-                mciSendString(sCmd, null, 0, 0);
-                if (Parameters.g_bPlayMusic == false)
-                {
-                    mciSendString("play temp_alias repeat", null, 0, 0);
-                    Parameters.g_bPlayMusic = true;
-                }
-                else if (Parameters.g_bPlayMusic == true)
-                {
-                    mciSendString("close temp_alias ", null, 0, 0);
-                    Parameters.g_bPlayMusic = false;
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
         }
 
         /// <summary>
@@ -266,7 +120,7 @@ namespace AEDemo
             }
             catch (Exception ex)
             {
-                CommFunction.WriteLog("显示图层属性失败", ex.ToString());
+                LogOperation.WriteLog("显示图层属性失败", ex.ToString());
                 bResult = false;
             }
             finally
@@ -278,7 +132,7 @@ namespace AEDemo
         }
 
         /// <summary>
-        /// 显示属性的详细信息
+        /// 显示图层下要素的详细信息
         /// </summary>
         /// <param name="frm"></param>
         /// <returns></returns>
@@ -347,7 +201,7 @@ namespace AEDemo
             }
             catch (Exception ex)
             {
-                WriteLog("显示字段详情失败：", ex.ToString());
+                LogOperation.WriteLog("显示要素详情失败：", ex.ToString());
                 bResult = false;
             }
             finally
@@ -440,7 +294,7 @@ namespace AEDemo
             }
             catch (Exception ex)
             {
-                WriteLog("闪烁显示要素失败：", ex.ToString());
+                LogOperation.WriteLog("闪烁显示要素失败：", ex.ToString());
                 bResult = false;
             }
             finally

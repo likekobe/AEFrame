@@ -14,6 +14,9 @@ using DevExpress.XtraTreeList.Nodes;
 
 namespace AEDemo
 {
+    /// <summary>
+    /// 缓冲区查询
+    /// </summary>
     public partial class frmBufferQuery : Form
     {
         public frmBufferQuery()
@@ -180,7 +183,7 @@ namespace AEDemo
             }
             catch (Exception ex)
             {
-
+                LogOperation.WriteLog("缓冲区查询失败", ex.ToString());
             }
         }
 
@@ -259,7 +262,7 @@ namespace AEDemo
             }
             catch (Exception ex)
             {
-
+                LogOperation.WriteLog("缓冲区查询时，要素定位闪烁失败", ex.ToString());
             }
         }
 
