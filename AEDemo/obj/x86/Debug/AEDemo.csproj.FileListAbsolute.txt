@@ -56,3 +56,5 @@ E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.csproj.GenerateResource.Cache
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe.licenses
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.pdb
+E:\Github\AEFrame\AEDemo\bin\x86\Debug\Microsoft.Office.Interop.Excel.dll
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.XtraForm1.resources

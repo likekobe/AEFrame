@@ -15,7 +15,7 @@ namespace AEDemo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmFrame());
+            Application.Run(new XtraForm1());
         }
     }
 }
