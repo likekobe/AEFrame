@@ -39,6 +39,7 @@
             this.LayerIndex = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.gcFieldInfo = new DevExpress.XtraGrid.GridControl();
             this.gvFieldInfo = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
@@ -55,6 +56,7 @@
             this.panelControl1.Appearance.BackColor = System.Drawing.Color.White;
             this.panelControl1.Appearance.Options.UseBackColor = true;
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.btnExport);
             this.panelControl1.Controls.Add(this.pictureEdit1);
             this.panelControl1.Controls.Add(this.labelLayerName);
             this.panelControl1.Controls.Add(this.labelControl1);
@@ -112,7 +114,7 @@
             this.LayerIndex});
             this.tlLayer.Location = new System.Drawing.Point(1, 72);
             this.tlLayer.Name = "tlLayer";
-            this.tlLayer.Size = new System.Drawing.Size(157, 319);
+            this.tlLayer.Size = new System.Drawing.Size(157, 321);
             this.tlLayer.TabIndex = 2;
             this.tlLayer.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.tlLayer_FocusedNodeChanged);
             // 
@@ -139,7 +141,7 @@
             this.gcFieldInfo.Location = new System.Drawing.Point(160, 72);
             this.gcFieldInfo.MainView = this.gvFieldInfo;
             this.gcFieldInfo.Name = "gcFieldInfo";
-            this.gcFieldInfo.Size = new System.Drawing.Size(404, 319);
+            this.gcFieldInfo.Size = new System.Drawing.Size(404, 321);
             this.gcFieldInfo.TabIndex = 3;
             this.gcFieldInfo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvFieldInfo});
@@ -154,11 +156,24 @@
             this.gvFieldInfo.OptionsView.ShowGroupPanel = false;
             this.gvFieldInfo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvFieldInfo_MouseDown);
             // 
+            // btnExport
+            // 
+            this.btnExport.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.btnExport.Appearance.Options.UseBackColor = true;
+            this.btnExport.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
+            this.btnExport.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.Image")));
+            this.btnExport.Location = new System.Drawing.Point(473, 9);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(42, 38);
+            this.btnExport.TabIndex = 3;
+            this.btnExport.ToolTip = "属性导出";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // frmPropertyDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 394);
+            this.ClientSize = new System.Drawing.Size(566, 396);
             this.Controls.Add(this.gcFieldInfo);
             this.Controls.Add(this.tlLayer);
             this.Controls.Add(this.panelControl2);
@@ -194,5 +209,6 @@
         public DevExpress.XtraTreeList.TreeList tlLayer;
         public DevExpress.XtraGrid.Views.Grid.GridView gvFieldInfo;
         private DevExpress.XtraTreeList.Columns.TreeListColumn LayerIndex;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
     }
 }

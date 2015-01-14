@@ -37,6 +37,9 @@ C:\Users\like\Desktop\AEDEMO\AEDemo\obj\x86\Debug\AEDemo.exe.licenses
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\AEDemo.exe
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\AEDemo.pdb
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\GxAEHelper.dll
+E:\Github\AEFrame\AEDemo\bin\x86\Debug\GxDlgHelper.dll
+E:\Github\AEFrame\AEDemo\bin\x86\Debug\Microsoft.Office.Interop.Excel.dll
+E:\Github\AEFrame\AEDemo\bin\x86\Debug\GxComHelper.dll
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\Interop.CELL50Lib.dll
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\AxInterop.CELL50Lib.dll
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\ResolveAssemblyReference.cache
@@ -56,5 +59,3 @@ E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.csproj.GenerateResource.Cache
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe.licenses
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.pdb
-E:\Github\AEFrame\AEDemo\bin\x86\Debug\Microsoft.Office.Interop.Excel.dll
-E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.XtraForm1.resources

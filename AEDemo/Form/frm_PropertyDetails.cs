@@ -100,6 +100,19 @@ namespace AEDemo
             }
         }
 
+        /// <summary>
+        /// 要素属性信息导出成Excel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (!LayerOperation.ExportToExcel(this))
+            {
+                GtMap.GxDlgHelper.DevMessageBox.ShowInformation("要素信息导出失败。");
+            }
+        }
+
 
     }
 }

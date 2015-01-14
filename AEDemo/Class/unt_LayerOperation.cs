@@ -21,12 +21,22 @@ namespace AEDemo
     class LayerOperation
     {
         /// <summary>
+        /// 储存要素属性信息
+        /// </summary>
+        private static DataTable m_dtFeature = null;
+
+        /// <summary>
+        /// 储存图层名称
+        /// </summary>
+        private static string m_sLayerName = string.Empty;
+
+        /// <summary>
         /// 判断当前是否选中要素
         /// </summary>
         /// <returns></returns>
         public static bool IsSelectFeature()
         {
-            bool bResult=false;
+            bool bResult = false;
 
             try
             {
@@ -47,7 +57,7 @@ namespace AEDemo
                     bResult = true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogOperation.WriteLog("判断当前是否选中要素失败", ex.ToString());
                 bResult = false;
@@ -193,6 +203,10 @@ namespace AEDemo
                     dt.Rows.Add(dr);
                     pFea = pFeaCursor.NextFeature();
                 }
+
+                m_dtFeature = dt;
+                m_sLayerName = Layer.Name;
+
                 frm.gcFieldInfo.DataSource = dt;
                 frm.gvFieldInfo.PopulateColumns();
                 frm.gvFieldInfo.BestFitColumns();
@@ -210,6 +224,102 @@ namespace AEDemo
                 ESRI.ArcGIS.ADF.ComReleaser.ReleaseCOMObject(pFeaClass);
                 ESRI.ArcGIS.ADF.ComReleaser.ReleaseCOMObject(pFeaCursor);
                 ESRI.ArcGIS.ADF.ComReleaser.ReleaseCOMObject(pFea);
+            }
+
+            return bResult;
+        }
+
+        /// <summary>
+        /// 要素属性信息导出
+        /// </summary>
+        /// <returns></returns>
+        public static bool ExportToExcel(frmPropertyDetails frm)
+        {
+            bool bResult = false;
+            GtMap.GxDlgHelper.ProgressDialog2 pDg =null;
+            string sFileName = string.Empty;
+
+            try
+            {
+                if (m_dtFeature != null && m_dtFeature.Rows.Count > 0)
+                {
+                    pDg = new GtMap.GxDlgHelper.ProgressDialog2(frm);
+                    string sTime = System.DateTime.Now.ToString("yyyyMMddHHmmss");
+                    SaveFileDialog SaveDlg = new SaveFileDialog();
+                    SaveDlg.Filter = "Excel(*.xlsx)|*.xlsx";
+                    SaveDlg.FileName = m_sLayerName + "图层的要素属性信息(" + sTime + ")";
+                    
+
+                    if (SaveDlg.ShowDialog() == DialogResult.OK)
+                    {
+                        sFileName = SaveDlg.FileName;
+                        object missing = System.Reflection.Missing.Value;
+                        Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+                        Microsoft.Office.Interop.Excel._Workbook workbook;
+                        Microsoft.Office.Interop.Excel._Worksheet worksheet;
+                        Microsoft.Office.Interop.Excel.Range range;
+                        ExcelApp.Application.Workbooks.Add(true);
+                        workbook = ExcelApp.ActiveWorkbook;
+                        worksheet = (Microsoft.Office.Interop.Excel._Worksheet)workbook.ActiveSheet;
+
+                        pDg.Title = "导出要素信息";
+                        pDg.Message = "导出图层要素信息";
+                        pDg.Min = 0;
+                        pDg.Max = m_dtFeature.Rows.Count;
+                        pDg.CancelEnabled = false;
+                        frm.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+
+                        //// Excel中添加列名称
+                        for (int k = 0; k < m_dtFeature.Columns.Count; k++)
+                        {
+                            worksheet.Cells[1, k + 1] = m_dtFeature.Columns[k].ColumnName;
+                        }
+
+                        pDg.Position = 0;
+                        pDg.Show();
+
+                        //// Excel中添加要素信息
+                        for (int i = 0; i < m_dtFeature.Rows.Count; i++)
+                        {
+                            pDg.Message = "导出选中图层的要素信息";
+                            pDg.Description = "正在导出第(" + i + "/" + m_dtFeature.Rows.Count + "条)记录……";
+                            pDg.Step(1);
+
+                            for (int j = 0; j < m_dtFeature.Columns.Count; j++)
+                            {
+                                worksheet.Cells[i + 2, j + 1] = m_dtFeature.Rows[i][j];
+                            }
+                        }
+
+                        //// 自适应列宽
+                        range = worksheet.Columns;
+                        range.AutoFit();
+
+                        workbook.SaveCopyAs(SaveDlg.FileName);
+                        workbook.Close(false, missing, missing);
+                        ExcelApp.Quit();
+                        bResult = true;
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOperation.WriteLog("要素属性信息导出成Excel失败", ex.ToString());
+                bResult = false;
+            }
+            finally
+            {
+                frm.Cursor = System.Windows.Forms.Cursors.Default;
+                pDg.Hide();
+                pDg = null;
+                if (bResult)
+                {
+                    if (GtMap.GxDlgHelper.DevMessageBox.ShowConfirmation("要素信息导出成功，是否打开所在文件？") == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(sFileName);
+                    }
+                }
             }
 
             return bResult;
@@ -246,7 +356,7 @@ namespace AEDemo
                         break;
                     }
                 }
-                
+
                 pFeaLayer = pLayer as IFeatureLayer;
                 pFeaClass = pFeaLayer.FeatureClass;
 
