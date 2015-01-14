@@ -23,7 +23,7 @@ namespace AEDemo
         /// <summary>
         /// 储存要素属性信息
         /// </summary>
-        private static DataTable m_dtFeature = null;
+        public static DataTable m_dtFeature = null;
 
         /// <summary>
         /// 储存图层名称
@@ -156,11 +156,14 @@ namespace AEDemo
             IFeature pFea = null;
             int iFieldCount = 0;
             DataTable dt = new DataTable();
+            string sOIDName = string.Empty;
 
             try
             {
                 pFeaLayer = Layer as IFeatureLayer;
                 pFeaClass = pFeaLayer.FeatureClass;
+                sOIDName = pFeaClass.OIDFieldName.ToString();
+                Parameters.g_sOIDName = sOIDName;
                 pFeaCursor = pFeaClass.Search(null, false);
                 pFea = pFeaCursor.NextFeature();
                 iFieldCount = pFeaClass.Fields.FieldCount;
@@ -170,6 +173,8 @@ namespace AEDemo
                     string sFieldName = pFeaClass.Fields.get_Field(i).Name;
                     dt.Columns.Add(sFieldName);
                 }
+
+                dt.Columns.Add("Index", typeof(Int32));
 
                 while (pFea != null)
                 {
@@ -200,16 +205,33 @@ namespace AEDemo
                             dr[i] = pFea.get_Value(i) != null ? pFea.get_Value(i) : string.Empty;
                         }
                     }
+                    dr["Index"] = Convert.ToInt32(dr[sOIDName]) + 1;
                     dt.Rows.Add(dr);
                     pFea = pFeaCursor.NextFeature();
                 }
 
+                Parameters.g_iSumRecords = dt.Rows.Count;
+                Parameters.g_iCurrentPage = 1;
+                double dSumRows = dt.Rows.Count;
+                double dPages = Math.Ceiling(dSumRows / Parameters.g_iMaxRows);
+                Parameters.g_iSumPages = Convert.ToInt32(dPages);
+
                 m_dtFeature = dt;
                 m_sLayerName = Layer.Name;
 
-                frm.gcFieldInfo.DataSource = dt;
-                frm.gvFieldInfo.PopulateColumns();
-                frm.gvFieldInfo.BestFitColumns();
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    string sWhereExpress = string.Format("Index<={0}", Parameters.g_iMaxRows);
+                    DataRow[] drArray = dt.Select(sWhereExpress);
+
+                    dt = drArray.CopyToDataTable();
+                    frm.gcFieldInfo.DataSource = dt;
+                    frm.gvFieldInfo.PopulateColumns();
+                    frm.gvFieldInfo.BestFitColumns();
+                    frm.labelRecords.Text = string.Format("第1/{0}条", Parameters.g_iSumRecords);
+                    frm.labelPages.Text = string.Format("页数：第1/{0}页", Parameters.g_iSumPages);
+                    frm.txtPage.Text = "1";
+                }
 
                 bResult = true;
             }
@@ -236,7 +258,7 @@ namespace AEDemo
         public static bool ExportToExcel(frmPropertyDetails frm)
         {
             bool bResult = false;
-            GtMap.GxDlgHelper.ProgressDialog2 pDg =null;
+            GtMap.GxDlgHelper.ProgressDialog2 pDg = null;
             string sFileName = string.Empty;
 
             try
@@ -248,7 +270,7 @@ namespace AEDemo
                     SaveFileDialog SaveDlg = new SaveFileDialog();
                     SaveDlg.Filter = "Excel(*.xlsx)|*.xlsx";
                     SaveDlg.FileName = m_sLayerName + "图层的要素属性信息(" + sTime + ")";
-                    
+
 
                     if (SaveDlg.ShowDialog() == DialogResult.OK)
                     {

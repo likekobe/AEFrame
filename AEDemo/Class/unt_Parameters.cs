@@ -14,6 +14,48 @@ namespace AEDemo
     /// </summary>
     class Parameters
     {
+
+        /// <summary>
+        /// 每页最大显示记录数
+        /// </summary>
+        public  const int g_iMaxRows = 30;
+
+        /// <summary>
+        /// OID字段的名字
+        /// </summary>
+        public static string g_sOIDName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 当前显示第几页
+        /// </summary>
+        public static int g_iCurrentPage
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 总页数
+        /// </summary>
+        public static int g_iSumPages
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 记录总条数
+        /// </summary>
+        public static int g_iSumRecords
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// 音乐播放状态标识符
         /// </summary>
