@@ -249,6 +249,18 @@ namespace AEDemo
         private void btnQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ////TODO：要素属性查询
+            if (Parameters.g_iLayerCount > 0)
+            {
+                frmPropertyQuery frm = new frmPropertyQuery();
+                frm.Show();
+            }
+            else
+            {
+                if (MessageBox.Show("未加载地图文档，是否加载地图文档？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    btnOpenMxd_ItemClick(null, null);
+                }
+            }
         }
 
         /// <summary>

@@ -59,3 +59,4 @@ E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.csproj.GenerateResource.Cache
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe.licenses
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.pdb
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmPropertyQuery.resources

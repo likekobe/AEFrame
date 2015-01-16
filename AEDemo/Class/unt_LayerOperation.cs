@@ -30,6 +30,7 @@ namespace AEDemo
         /// </summary>
         private static string m_sLayerName = string.Empty;
 
+        #region 要素是否选中、 根据字段名获取所有属性值
         /// <summary>
         /// 判断当前是否选中要素
         /// </summary>
@@ -66,6 +67,142 @@ namespace AEDemo
             return bResult;
         }
 
+        /// <summary>
+        /// 根据字段名获取所有属性值
+        /// </summary>
+        /// <param name="Layer"></param>
+        /// <param name="FieldName"></param>
+        /// <returns></returns>
+        public static List<string> GetFieldValue(ILayer Layer, string FieldName)
+        {
+            List<string> listValue = new List<string> { };
+            IFeatureLayer pFeaLayer = null;
+            IFeatureClass pFeaClass = null;
+            IFeature pFea = null;
+            IFeatureCursor pFeaCursor = null;
+            //// 字段索引号
+            int iFieldIndex = 0;
+            bool bIsContained = false;
+
+            try
+            {
+                pFeaLayer = Layer as IFeatureLayer;
+                pFeaClass = pFeaLayer.FeatureClass;
+                pFeaCursor = pFeaClass.Search(null, true);
+                pFea = pFeaCursor.NextFeature();
+                iFieldIndex = pFeaClass.FindField(FieldName);
+
+                ////遍历要素
+                while (pFea != null)
+                {
+                    string sFieldValue = pFea.get_Value(iFieldIndex).ToString();
+
+                    //// 判断当前List是否已经包含待添加的字段值，未包含则添加
+                    for (int i = 0; i < listValue.Count; i++)
+                    {
+                        string sListValue = listValue[i].ToString();
+
+                        if (sListValue.Equals(sFieldValue))
+                        {
+                            bIsContained = true;
+                            break;
+                        }
+                    }
+
+                    if (!bIsContained)
+                    {
+                        listValue.Add(sFieldValue);
+                    }
+
+                    pFea = pFeaCursor.NextFeature();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOperation.WriteLog("根据字段名获取字段属性值失败", ex.ToString());
+            }
+            return listValue;
+        }
+
+        public static DataTable FeatureQuery(ILayer Layer,string WhereExpress)
+        {
+            DataTable dt = new DataTable();
+            IFeatureLayer pFeaLayer = null;
+            IFeatureClass pFeaClass = null;
+            IFeature pFea = null;
+            IFeatureCursor pFeaCursor = null;
+            IQueryFilter pQueryFilter = new QueryFilterClass();
+
+            try
+            {
+                pFeaLayer = Layer as IFeatureLayer;
+                pFeaClass = pFeaLayer.FeatureClass;
+                pQueryFilter.WhereClause = WhereExpress;
+                pFeaCursor = pFeaClass.Search(pQueryFilter, false);
+                pFea = pFeaCursor.NextFeature();
+
+                for (int i = 0; i < pFeaClass.Fields.FieldCount;i++ )
+                {
+                    string sFieldName = pFeaClass.Fields.get_Field(i).Name;
+                    dt.Columns.Add(sFieldName);
+                }
+
+                while(pFea!=null)
+                {
+                    DataRow dr = dt.NewRow();
+                    for (int i = 0; i < pFeaClass.Fields.FieldCount; i++)
+                    {
+                        if (pFeaClass.Fields.get_Field(i).Type == esriFieldType.esriFieldTypeGeometry)
+                        {
+                            if (pFea.Shape.GeometryType.ToString().ToLower().Equals("esrigeometrypolygon"))
+                            {
+                                dr[i] = "面";
+                            }
+                            else if (pFea.Shape.GeometryType.ToString().ToLower().Equals("esrigeometrypolyline"))
+                            {
+                                dr[i] = "线";
+                            }
+                            else if (pFea.Shape.GeometryType.ToString().ToLower().Equals("esrigeometrypoint"))
+                            {
+                                dr[i] = "点";
+                            }
+                        }
+                        else if (pFeaClass.Fields.get_Field(i).Type == esriFieldType.esriFieldTypeBlob)
+                        {
+                            dr[i] = "BLOB";
+                        }
+                        else
+                        {
+                            dr[i] = pFea.get_Value(i) != null ? pFea.get_Value(i) : string.Empty;
+                        }
+                    }
+                    //dr["Index"] = Convert.ToInt32(dr[sOIDName]) + 1;
+                    dt.Rows.Add(dr);
+                    pFea = pFeaCursor.NextFeature();
+                }
+
+            }
+            catch(Exception ex)
+            {
+                LogOperation.WriteLog("属性查询失败", ex.ToString());
+                dt = null;
+            }
+            finally
+            {
+                ESRI.ArcGIS.ADF.ComReleaser.ReleaseCOMObject(pFeaLayer);
+                ESRI.ArcGIS.ADF.ComReleaser.ReleaseCOMObject(pFeaClass);
+                ESRI.ArcGIS.ADF.ComReleaser.ReleaseCOMObject(pFeaCursor);
+                ESRI.ArcGIS.ADF.ComReleaser.ReleaseCOMObject(pFea);
+                ESRI.ArcGIS.ADF.ComReleaser.ReleaseCOMObject(pQueryFilter);
+            }
+            return dt;
+        
+        }
+
+
+        #endregion
+
+        #region 获得图层属性、要素属性
         /// <summary>
         /// 显示图层属性
         /// </summary>
@@ -250,7 +387,9 @@ namespace AEDemo
 
             return bResult;
         }
+        #endregion
 
+        #region 要素属性导出
         /// <summary>
         /// 要素属性信息导出
         /// </summary>
@@ -346,6 +485,7 @@ namespace AEDemo
 
             return bResult;
         }
+        #endregion
 
         /// <summary>
         /// 选中属性表的要素时，闪烁并放大

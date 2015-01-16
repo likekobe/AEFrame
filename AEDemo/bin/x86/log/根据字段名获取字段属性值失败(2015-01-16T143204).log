@@ -1,0 +1,2 @@
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 AEDemo.LayerOperation.GetFieldValue(ILayer Layer, String FieldName) 位置 E:\Github\AEFrame\AEDemo\Class\unt_LayerOperation.cs:行号 90

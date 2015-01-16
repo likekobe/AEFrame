@@ -1,0 +1,3 @@
+System.Runtime.InteropServices.COMException (0x80040207): 每用户订阅上的所有者 SID 不存在 (异常来自 HRESULT:0x80040207)
+   在 ESRI.ArcGIS.Geodatabase.IFeatureClass.Search(IQueryFilter filter, Boolean Recycling)
+   在 AEDemo.LayerOperation.FeatureQuery(ILayer Layer, String WhereExpress) 位置 E:\Github\AEFrame\AEDemo\Class\unt_LayerOperation.cs:行号 141

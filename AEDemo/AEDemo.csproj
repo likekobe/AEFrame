@@ -173,6 +173,12 @@
     <Compile Include="Form\frm_ShowTips.Designer.cs">
       <DependentUpon>frm_ShowTips.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frm_PropertyQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frm_PropertyQuery.Designer.cs">
+      <DependentUpon>frm_PropertyQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\Cell\frm_CellBase.resx">
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frm_PropertyDetails.resx">
       <DependentUpon>frm_PropertyDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frm_PropertyQuery.resx">
+      <DependentUpon>frm_PropertyQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frm_ShowTips.resx">
       <DependentUpon>frm_ShowTips.cs</DependentUpon>
