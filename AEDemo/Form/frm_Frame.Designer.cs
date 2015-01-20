@@ -81,6 +81,7 @@
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnSQLQuery = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboOperationTask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboOperationLayer)).BeginInit();
@@ -125,9 +126,10 @@
             this.btnOperationLayer,
             this.btnStartEdit,
             this.btnStopEdit,
-            this.btnSaveEdit});
+            this.btnSaveEdit,
+            this.btnSQLQuery});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 29;
+            this.ribbonControl1.MaxItemId = 30;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnPlayMusic);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -391,6 +393,7 @@
             // ribbonPageGroup3
             // 
             this.ribbonPageGroup3.ItemLinks.Add(this.btnQuery);
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnSQLQuery);
             this.ribbonPageGroup3.ItemLinks.Add(this.btnSpatialQuery);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "查询";
@@ -468,13 +471,13 @@
             this.设置空间参考ToolStripMenuItem,
             this.选中显示字段TipsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 180);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 158);
             // 
             // 浏览属性ToolStripMenuItem
             // 
             this.浏览属性ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("浏览属性ToolStripMenuItem.Image")));
             this.浏览属性ToolStripMenuItem.Name = "浏览属性ToolStripMenuItem";
-            this.浏览属性ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.浏览属性ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.浏览属性ToolStripMenuItem.Text = "浏览属性";
             this.浏览属性ToolStripMenuItem.Click += new System.EventHandler(this.浏览属性ToolStripMenuItem_Click);
             // 
@@ -482,7 +485,7 @@
             // 
             this.移除图层ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("移除图层ToolStripMenuItem.Image")));
             this.移除图层ToolStripMenuItem.Name = "移除图层ToolStripMenuItem";
-            this.移除图层ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.移除图层ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.移除图层ToolStripMenuItem.Text = "移除图层";
             this.移除图层ToolStripMenuItem.Click += new System.EventHandler(this.移除图层ToolStripMenuItem_Click);
             // 
@@ -490,7 +493,7 @@
             // 
             this.缩放到图层ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("缩放到图层ToolStripMenuItem.Image")));
             this.缩放到图层ToolStripMenuItem.Name = "缩放到图层ToolStripMenuItem";
-            this.缩放到图层ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.缩放到图层ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.缩放到图层ToolStripMenuItem.Text = "缩放到图层";
             this.缩放到图层ToolStripMenuItem.Click += new System.EventHandler(this.缩放到图层ToolStripMenuItem_Click);
             // 
@@ -498,7 +501,7 @@
             // 
             this.选择ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("选择ToolStripMenuItem.Image")));
             this.选择ToolStripMenuItem.Name = "选择ToolStripMenuItem";
-            this.选择ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.选择ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.选择ToolStripMenuItem.Text = "选择";
             this.选择ToolStripMenuItem.Click += new System.EventHandler(this.选择ToolStripMenuItem_Click);
             // 
@@ -506,7 +509,7 @@
             // 
             this.图层属性ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("图层属性ToolStripMenuItem.Image")));
             this.图层属性ToolStripMenuItem.Name = "图层属性ToolStripMenuItem";
-            this.图层属性ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.图层属性ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.图层属性ToolStripMenuItem.Text = "图层属性";
             this.图层属性ToolStripMenuItem.Click += new System.EventHandler(this.图层属性ToolStripMenuItem_Click);
             // 
@@ -514,7 +517,7 @@
             // 
             this.设置空间参考ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("设置空间参考ToolStripMenuItem.Image")));
             this.设置空间参考ToolStripMenuItem.Name = "设置空间参考ToolStripMenuItem";
-            this.设置空间参考ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.设置空间参考ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.设置空间参考ToolStripMenuItem.Text = "设置空间参考";
             this.设置空间参考ToolStripMenuItem.Click += new System.EventHandler(this.设置空间参考ToolStripMenuItem_Click);
             // 
@@ -638,6 +641,16 @@
             this.axMapControl2.Size = new System.Drawing.Size(271, 224);
             this.axMapControl2.TabIndex = 0;
             // 
+            // btnSQLQuery
+            // 
+            this.btnSQLQuery.Caption = "SQL查询";
+            this.btnSQLQuery.Glyph = ((System.Drawing.Image)(resources.GetObject("btnSQLQuery.Glyph")));
+            this.btnSQLQuery.Id = 29;
+            this.btnSQLQuery.LargeWidth = 85;
+            this.btnSQLQuery.Name = "btnSQLQuery";
+            this.btnSQLQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnSQLQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSQLQuery_ItemClick);
+            // 
             // frmFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -726,6 +739,7 @@
         private DevExpress.XtraBars.BarButtonItem btnStopEdit;
         private DevExpress.XtraBars.BarButtonItem btnSaveEdit;
         private System.Windows.Forms.ToolStripMenuItem 选中显示字段TipsToolStripMenuItem;
+        private DevExpress.XtraBars.BarButtonItem btnSQLQuery;
 
     }
 }

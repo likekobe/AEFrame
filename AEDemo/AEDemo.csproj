@@ -179,6 +179,12 @@
     <Compile Include="Form\frm_PropertyQuery.Designer.cs">
       <DependentUpon>frm_PropertyQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\frm_SQLQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frm_SQLQuery.Designer.cs">
+      <DependentUpon>frm_SQLQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\Cell\frm_CellBase.resx">
@@ -204,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frm_ShowTips.resx">
       <DependentUpon>frm_ShowTips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frm_SQLQuery.resx">
+      <DependentUpon>frm_SQLQuery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Log\frm_ShowLog.resx">
       <DependentUpon>frm_ShowLog.cs</DependentUpon>
