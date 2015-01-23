@@ -51,6 +51,7 @@
             this.btnStartEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnStopEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveEdit = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSQLQuery = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -81,7 +82,7 @@
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSQLQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnConfig = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboOperationTask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboOperationLayer)).BeginInit();
@@ -127,9 +128,10 @@
             this.btnStartEdit,
             this.btnStopEdit,
             this.btnSaveEdit,
-            this.btnSQLQuery});
+            this.btnSQLQuery,
+            this.btnConfig});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 30;
+            this.ribbonControl1.MaxItemId = 31;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnPlayMusic);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -345,6 +347,16 @@
             this.btnSaveEdit.Name = "btnSaveEdit";
             this.btnSaveEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveEdit_ItemClick);
             // 
+            // btnSQLQuery
+            // 
+            this.btnSQLQuery.Caption = "SQL查询";
+            this.btnSQLQuery.Glyph = ((System.Drawing.Image)(resources.GetObject("btnSQLQuery.Glyph")));
+            this.btnSQLQuery.Id = 29;
+            this.btnSQLQuery.LargeWidth = 85;
+            this.btnSQLQuery.Name = "btnSQLQuery";
+            this.btnSQLQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnSQLQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSQLQuery_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -395,6 +407,7 @@
             this.ribbonPageGroup3.ItemLinks.Add(this.btnQuery);
             this.ribbonPageGroup3.ItemLinks.Add(this.btnSQLQuery);
             this.ribbonPageGroup3.ItemLinks.Add(this.btnSpatialQuery);
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnConfig);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "查询";
             // 
@@ -641,15 +654,15 @@
             this.axMapControl2.Size = new System.Drawing.Size(271, 224);
             this.axMapControl2.TabIndex = 0;
             // 
-            // btnSQLQuery
+            // btnConfig
             // 
-            this.btnSQLQuery.Caption = "SQL查询";
-            this.btnSQLQuery.Glyph = ((System.Drawing.Image)(resources.GetObject("btnSQLQuery.Glyph")));
-            this.btnSQLQuery.Id = 29;
-            this.btnSQLQuery.LargeWidth = 85;
-            this.btnSQLQuery.Name = "btnSQLQuery";
-            this.btnSQLQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.btnSQLQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSQLQuery_ItemClick);
+            this.btnConfig.Caption = "配置图层";
+            this.btnConfig.Glyph = ((System.Drawing.Image)(resources.GetObject("btnConfig.Glyph")));
+            this.btnConfig.Id = 30;
+            this.btnConfig.LargeWidth = 85;
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfig_ItemClick);
             // 
             // frmFrame
             // 
@@ -740,6 +753,7 @@
         private DevExpress.XtraBars.BarButtonItem btnSaveEdit;
         private System.Windows.Forms.ToolStripMenuItem 选中显示字段TipsToolStripMenuItem;
         private DevExpress.XtraBars.BarButtonItem btnSQLQuery;
+        private DevExpress.XtraBars.BarButtonItem btnConfig;
 
     }
 }

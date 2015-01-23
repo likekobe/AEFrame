@@ -1,0 +1,4 @@
+System.ArgumentException: 偏移量和长度超出数组的界限，或者计数大于从索引到源集合结尾处的元素数量。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.List`1.RemoveRange(Int32 index, Int32 count)
+   在 AEDemo.frmAddInConfig.NewAddInConfig(String LayerName, List`1 ListLayerName)

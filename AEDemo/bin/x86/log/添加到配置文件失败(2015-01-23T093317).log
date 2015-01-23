@@ -1,0 +1,5 @@
+System.ArgumentOutOfRangeException: 要求非负数。
+参数名: count
+   在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   在 System.Collections.Generic.List`1.RemoveRange(Int32 index, Int32 count)
+   在 AEDemo.frmAddInConfig.NewAddInConfig(String LayerName, List`1 ListLayerName) 位置 E:\Github\AEFrame\AEDemo\Form\frm_AddInConfig.cs:行号 197

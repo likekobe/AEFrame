@@ -264,13 +264,33 @@ namespace AEDemo
         }
 
         /// <summary>
+        /// 修改配置文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnConfig_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (Parameters.g_iLayerCount > 0)
+            {
+                frmAddInConfig frm = new frmAddInConfig();
+                frm.Show();
+            }
+            else
+            {
+                if (MessageBox.Show("未加载地图文档，是否加载地图文档？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    btnOpenMxd_ItemClick(null, null);
+                }
+            }
+        }
+
+        /// <summary>
         /// SQL查询
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSQLQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ////TODO：要素属性查询
             if (Parameters.g_iLayerCount > 0)
             {
                 frmSQLQuery frm = new frmSQLQuery();
@@ -674,6 +694,8 @@ namespace AEDemo
             Edit.Add(sLayerName, this);
         }
         #endregion
+
+        
 
      
 

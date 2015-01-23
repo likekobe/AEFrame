@@ -156,6 +156,17 @@ namespace AEDemo
         }
 
         /// <summary>
+        /// Config文件路径
+        /// </summary>
+        public static string g_sConfigPath
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().Location + "\\..\\..\\config.ini";
+            }
+        }
+
+        /// <summary>
         /// 背景音乐文件夹路径
         /// </summary>
         public static string g_sBgmPath
