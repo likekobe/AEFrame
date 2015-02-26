@@ -9,6 +9,9 @@ using System.Runtime.InteropServices;
 
 namespace AEDemo
 {
+    /// <summary>
+    /// 在图层中增加要素
+    /// </summary>
     class Edit
     {
         public static void Add(string LayerName,frmFrame frm)
@@ -30,6 +33,11 @@ namespace AEDemo
             frm.axMapControl1.Refresh();
         }
 
+        /// <summary>
+        /// 在图层中增加要素
+        /// </summary>
+        /// <param name="LayerName"></param>
+        /// <param name="Geometry"></param>
         public static void AddFeature(string LayerName,IGeometry Geometry)
         {
             try

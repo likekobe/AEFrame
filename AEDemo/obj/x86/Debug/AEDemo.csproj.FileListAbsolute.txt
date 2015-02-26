@@ -37,9 +37,9 @@ C:\Users\like\Desktop\AEDEMO\AEDemo\obj\x86\Debug\AEDemo.exe.licenses
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\AEDemo.exe
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\AEDemo.pdb
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\GxAEHelper.dll
+E:\Github\AEFrame\AEDemo\bin\x86\Debug\GxComHelper.dll
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\GxDlgHelper.dll
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\Microsoft.Office.Interop.Excel.dll
-E:\Github\AEFrame\AEDemo\bin\x86\Debug\GxComHelper.dll
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\Interop.CELL50Lib.dll
 E:\Github\AEFrame\AEDemo\bin\x86\Debug\AxInterop.CELL50Lib.dll
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\ResolveAssemblyReference.cache
@@ -52,13 +52,13 @@ E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmFrame.resources
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmLayerProperty.resources
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmLoadReport.resources
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmPropertyDetails.resources
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmPropertyQuery.resources
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frm_ShowTips.resources
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmSQLQuery.resources
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmShowLog.resources
+E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmAddInConfig.resources
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.Properties.Resources.resources
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.csproj.GenerateResource.Cache
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe.licenses
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.exe
 E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.pdb
-E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmPropertyQuery.resources
-E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmSQLQuery.resources
-E:\Github\AEFrame\AEDemo\obj\x86\Debug\AEDemo.frmAddInConfig.resources

@@ -105,18 +105,24 @@ namespace AEDemo
             bool bResult = false;
             try
             {
-                //// 读取配置文件中所有行
-                string[] sAllLines = File.ReadAllLines(Parameters.g_sConfigPath);
-
-                for (int i = 0; i < sAllLines.Length; i++)
+                if (File.Exists(Parameters.g_sConfigPath))
                 {
-                    if (sAllLines[i].StartsWith("[") && sAllLines[i].Trim().Equals(LayerName))
+                    //// 读取配置文件中所有行
+                    string[] sAllLines = File.ReadAllLines(Parameters.g_sConfigPath, UnicodeEncoding.Default);
+
+                    for (int i = 0; i < sAllLines.Length; i++)
                     {
-                        bResult = true;
-                        break;
+                        if (sAllLines[i].StartsWith("[") && sAllLines[i].Trim().Equals(LayerName))
+                        {
+                            bResult = true;
+                            break;
+                        }
                     }
                 }
-
+                else
+                {
+                    GtMap.GxDlgHelper.DevMessageBox.ShowInformation("配置文件不存在。");
+                }
             }
             catch
             {
@@ -136,17 +142,25 @@ namespace AEDemo
             bool bResult = false;
             try
             {
-                StreamWriter streamWriter = new StreamWriter(Parameters.g_sConfigPath, true);
-                streamWriter.WriteLine(LayerName);
-
-                for (int i = 0; i < ListLayerName.Count; i++)
+                if (File.Exists(Parameters.g_sConfigPath))
                 {
-                    string sValue = "LayerName[" + i + "]=" + ListLayerName[i];
-                    streamWriter.WriteLine(sValue);
+                    StreamWriter streamWriter = new StreamWriter(Parameters.g_sConfigPath, true, UnicodeEncoding.Default);
+                    streamWriter.WriteLine(LayerName);
+
+                    for (int i = 0; i < ListLayerName.Count; i++)
+                    {
+                        string sValue = "LayerName[" + i + "]=" + ListLayerName[i];
+                        streamWriter.WriteLine(sValue);
+                    }
+
+                    streamWriter.Close();
+                    bResult = true;
+                }
+                else
+                {
+                    GtMap.GxDlgHelper.DevMessageBox.ShowInformation("配置文件不存在。");
                 }
 
-                streamWriter.Close();
-                bResult = true;
             }
             catch (Exception ex)
             {
@@ -166,53 +180,60 @@ namespace AEDemo
             bool bResult = false;
             try
             {
-                //// 读取配置文件中所有行
-                string[] sAllLines = File.ReadAllLines(Parameters.g_sConfigPath);
-
-                List<string> listAllLines = new List<string> { };
-
-                bool bStart = false;
-                int iStart = 0;
-                int iEnd = -1;
-
-                for (int i = 0; i < sAllLines.Length; i++)
+                if (File.Exists(Parameters.g_sConfigPath))
                 {
-                    if (bStart && sAllLines[i].StartsWith("["))
+                    //// 读取配置文件中所有行
+                    string[] sAllLines = File.ReadAllLines(Parameters.g_sConfigPath, UnicodeEncoding.Default);
+
+                    List<string> listAllLines = new List<string> { };
+
+                    bool bStart = false;
+                    int iStart = 0;
+                    int iEnd = -1;
+
+                    for (int i = 0; i < sAllLines.Length; i++)
                     {
-                        iEnd = i;
-                        break;
+                        if (bStart && sAllLines[i].StartsWith("["))
+                        {
+                            iEnd = i;
+                            break;
+                        }
+
+                        if (sAllLines[i].StartsWith("[") && sAllLines[i].Trim().Equals(LayerName))
+                        {
+                            iStart = i;
+                            bStart = true;
+                        }
+
+                        listAllLines.Add(sAllLines[i]);
                     }
 
-                    if (sAllLines[i].StartsWith("[") && sAllLines[i].Trim().Equals(LayerName))
+                    if (iEnd == -1)
                     {
-                        iStart = i;
-                        bStart = true;
+                        iEnd = sAllLines.Length;
                     }
 
-                    listAllLines.Add(sAllLines[i]);
-                }
+                    //// 移除
+                    listAllLines.RemoveRange(iStart + 1, iEnd - iStart - 1);
 
-                if(iEnd==-1)
+                    for (int i = 0; i < ListLayerName.Count; i++)
+                    {
+                        string sValue = "LayerName[" + i + "]=" + ListLayerName[i];
+                        listAllLines.Add(sValue);
+                    }
+
+                    for (int i = iEnd; i < sAllLines.Length; i++)
+                    {
+                        listAllLines.Add(sAllLines[i]);
+                    }
+
+                    File.WriteAllLines(Parameters.g_sConfigPath, listAllLines.ToArray(), UnicodeEncoding.Default);
+                    bResult = true;
+                }
+                else
                 {
-                    iEnd = sAllLines.Length;
+                    GtMap.GxDlgHelper.DevMessageBox.ShowInformation("配置文件不存在。");
                 }
-
-                //// 移除
-                listAllLines.RemoveRange(iStart + 1, iEnd - iStart-1);
-
-                for (int i = 0; i < ListLayerName.Count; i++)
-                {
-                    string sValue = "LayerName[" + i + "]=" + ListLayerName[i];
-                    listAllLines.Add(sValue);
-                }
-
-                for (int i = iEnd; i < sAllLines.Length; i++)
-                {
-                    listAllLines.Add(sAllLines[i]);
-                }
-
-                File.WriteAllLines(Parameters.g_sConfigPath, listAllLines.ToArray());
-                bResult = true;
             }
             catch (Exception ex)
             {
@@ -236,7 +257,7 @@ namespace AEDemo
             {
                 LayerName = "[" + LayerName + "LayerInfo]";
                 //// 读取配置文件中所有行
-                string[] sAllLines = File.ReadAllLines(Parameters.g_sConfigPath, UnicodeEncoding.GetEncoding("GB2312"));
+                string[] sAllLines = File.ReadAllLines(Parameters.g_sConfigPath, UnicodeEncoding.Default);
                 bool bStart = false;
                 int iStart = 0;
                 int iEnd = -1;
@@ -280,7 +301,7 @@ namespace AEDemo
 
         private void btnRead_Click(object sender, EventArgs e)
         {
-            ReadLayerInfo("dlzx");
+            //ReadLayerInfo("dlzx");
         }
 
     }

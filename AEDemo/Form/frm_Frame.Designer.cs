@@ -52,6 +52,8 @@
             this.btnStopEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnSaveEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnSQLQuery = new DevExpress.XtraBars.BarButtonItem();
+            this.btnConfig = new DevExpress.XtraBars.BarButtonItem();
+            this.btnGetFeatureID = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -82,7 +84,6 @@
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnConfig = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboOperationTask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboOperationLayer)).BeginInit();
@@ -129,9 +130,10 @@
             this.btnStopEdit,
             this.btnSaveEdit,
             this.btnSQLQuery,
-            this.btnConfig});
+            this.btnConfig,
+            this.btnGetFeatureID});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 31;
+            this.ribbonControl1.MaxItemId = 32;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnPlayMusic);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -357,6 +359,25 @@
             this.btnSQLQuery.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.btnSQLQuery.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSQLQuery_ItemClick);
             // 
+            // btnConfig
+            // 
+            this.btnConfig.Caption = "配置图层";
+            this.btnConfig.Glyph = ((System.Drawing.Image)(resources.GetObject("btnConfig.Glyph")));
+            this.btnConfig.Id = 30;
+            this.btnConfig.LargeWidth = 85;
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.btnConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfig_ItemClick);
+            // 
+            // btnGetFeatureID
+            // 
+            this.btnGetFeatureID.Caption = "返回所在要素";
+            this.btnGetFeatureID.Glyph = ((System.Drawing.Image)(resources.GetObject("btnGetFeatureID.Glyph")));
+            this.btnGetFeatureID.Id = 31;
+            this.btnGetFeatureID.LargeWidth = 85;
+            this.btnGetFeatureID.Name = "btnGetFeatureID";
+            this.btnGetFeatureID.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -484,7 +505,7 @@
             this.设置空间参考ToolStripMenuItem,
             this.选中显示字段TipsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 158);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 180);
             // 
             // 浏览属性ToolStripMenuItem
             // 
@@ -515,7 +536,7 @@
             this.选择ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("选择ToolStripMenuItem.Image")));
             this.选择ToolStripMenuItem.Name = "选择ToolStripMenuItem";
             this.选择ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.选择ToolStripMenuItem.Text = "选择";
+            this.选择ToolStripMenuItem.Text = "选中图层";
             this.选择ToolStripMenuItem.Click += new System.EventHandler(this.选择ToolStripMenuItem_Click);
             // 
             // 图层属性ToolStripMenuItem
@@ -611,7 +632,7 @@
             // dockManager1
             // 
             this.dockManager1.Form = this;
-            this.dockManager1.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
+            this.dockManager1.HiddenPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
             this.dockPanel1});
             this.dockManager1.TopZIndexControls.AddRange(new string[] {
             "DevExpress.XtraBars.BarDockControl",
@@ -622,20 +643,20 @@
             // 
             // dockPanel1
             // 
-            this.dockPanel1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(245)))), ((int)(((byte)(241)))));
+            this.dockPanel1.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.dockPanel1.Appearance.Options.UseBackColor = true;
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Float;
             this.dockPanel1.FloatLocation = new System.Drawing.Point(746, 558);
             this.dockPanel1.FloatSize = new System.Drawing.Size(275, 250);
             this.dockPanel1.ID = new System.Guid("a7dad13d-c86a-4201-848b-de62b340cc0d");
-            this.dockPanel1.Location = new System.Drawing.Point(0, 0);
+            this.dockPanel1.Location = new System.Drawing.Point(-32768, -32768);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 200);
-            this.dockPanel1.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Right;
             this.dockPanel1.SavedIndex = 0;
             this.dockPanel1.Size = new System.Drawing.Size(275, 250);
             this.dockPanel1.Text = "鹰眼";
+            this.dockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
             // 
             // dockPanel1_Container
             // 
@@ -653,16 +674,6 @@
             this.axMapControl2.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl2.OcxState")));
             this.axMapControl2.Size = new System.Drawing.Size(271, 224);
             this.axMapControl2.TabIndex = 0;
-            // 
-            // btnConfig
-            // 
-            this.btnConfig.Caption = "配置图层";
-            this.btnConfig.Glyph = ((System.Drawing.Image)(resources.GetObject("btnConfig.Glyph")));
-            this.btnConfig.Id = 30;
-            this.btnConfig.LargeWidth = 85;
-            this.btnConfig.Name = "btnConfig";
-            this.btnConfig.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.btnConfig.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfig_ItemClick);
             // 
             // frmFrame
             // 
@@ -754,6 +765,7 @@
         private System.Windows.Forms.ToolStripMenuItem 选中显示字段TipsToolStripMenuItem;
         private DevExpress.XtraBars.BarButtonItem btnSQLQuery;
         private DevExpress.XtraBars.BarButtonItem btnConfig;
+        private DevExpress.XtraBars.BarButtonItem btnGetFeatureID;
 
     }
 }

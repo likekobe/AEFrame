@@ -124,7 +124,7 @@ namespace AEDemo
             return listValue;
         }
 
-        public static DataTable FeatureQuery(ILayer Layer,string WhereExpress)
+        public static DataTable FeatureQuery(ILayer Layer, string WhereExpress)
         {
             DataTable dt = new DataTable();
             IFeatureLayer pFeaLayer = null;
@@ -141,13 +141,13 @@ namespace AEDemo
                 pFeaCursor = pFeaClass.Search(pQueryFilter, false);
                 pFea = pFeaCursor.NextFeature();
 
-                for (int i = 0; i < pFeaClass.Fields.FieldCount;i++ )
+                for (int i = 0; i < pFeaClass.Fields.FieldCount; i++)
                 {
                     string sFieldName = pFeaClass.Fields.get_Field(i).Name;
                     dt.Columns.Add(sFieldName);
                 }
 
-                while(pFea!=null)
+                while (pFea != null)
                 {
                     DataRow dr = dt.NewRow();
                     for (int i = 0; i < pFeaClass.Fields.FieldCount; i++)
@@ -182,7 +182,7 @@ namespace AEDemo
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogOperation.WriteLog("属性查询失败", ex.ToString());
                 dt = null;
@@ -196,7 +196,7 @@ namespace AEDemo
                 ESRI.ArcGIS.ADF.ComReleaser.ReleaseCOMObject(pQueryFilter);
             }
             return dt;
-        
+
         }
 
 
@@ -493,7 +493,7 @@ namespace AEDemo
         /// <param name="frm"></param>
         /// <param name="frmMain"></param>
         /// <returns></returns>
-        public static bool FlashShape(frmPropertyDetails frm, frmFrame frmMain)
+        public static bool FlashShape(frmPropertyDetails frm, frmFrame frmMain, bool IsDoubleClick)
         {
             bool bResult = false;
             ILayer pLayer = null;
@@ -540,24 +540,32 @@ namespace AEDemo
                 //// 清空上次选择
                 frmMain.axMapControl1.Map.ClearSelection();
 
-                //// 要素闪烁
-                frmMain.axMapControl1.FlashShape(pFea.Shape);
+                if (IsDoubleClick)
+                {
+                    //// 要素闪烁
+                    frmMain.axMapControl1.FlashShape(pFea.Shape);
 
-                //// 选择要素
-                frmMain.axMapControl1.Map.SelectFeature(pFeaLayer, pFea);
+                    //// 选择要素
+                    frmMain.axMapControl1.Map.SelectFeature(pFeaLayer, pFea);
 
-                //// 放大图形
-                IEnvelope pEnvlope = pFea.Shape.Envelope;
-                //pEnvlope.Height = pEnvlope.Height * 6;
-                //pEnvlope.Width = pEnvlope.Width * 6;
+                    //// 放大图形
+                    IEnvelope pEnvlope = pFea.Shape.Envelope;
+                    //pEnvlope.Height = pEnvlope.Height * 6;
+                    //pEnvlope.Width = pEnvlope.Width * 6;
 
-                //// 获得要素中心点
-                //IPoint pPoint = (pEnvlope as IArea).Centroid;
-                //IPoint pPoint = new PointClass();
-                //pPoint.X = (pEnvlope.LowerLeft.X+pEnvlope.UpperRight.X) / 2;
-                //pPoint.Y = (pEnvlope.LowerLeft.Y + pEnvlope.UpperRight.Y) / 2;
+                    //// 获得要素中心点
+                    //IPoint pPoint = (pEnvlope as IArea).Centroid;
+                    //IPoint pPoint = new PointClass();
+                    //pPoint.X = (pEnvlope.LowerLeft.X+pEnvlope.UpperRight.X) / 2;
+                    //pPoint.Y = (pEnvlope.LowerLeft.Y + pEnvlope.UpperRight.Y) / 2;
 
-                frmMain.axMapControl1.Extent = pEnvlope;
+                    frmMain.axMapControl1.Extent = pEnvlope;
+                }
+                else
+                {
+                    //// 选择要素
+                    frmMain.axMapControl1.Map.SelectFeature(pFeaLayer, pFea);
+                }
                 //frmMain.axMapControl1.CenterAt(pPoint);
 
                 // IGeometry pGeo = IGeometry(pFea);

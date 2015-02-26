@@ -97,7 +97,17 @@ namespace AEDemo
                 //// 判断光标是否在行内  
                 if (gridHitInfo.InRow)
                 {
-                    LayerOperation.FlashShape(this, (frmFrame)this.Owner);
+                    LayerOperation.FlashShape(this, (frmFrame)this.Owner,true);
+                }
+            }
+            else if (e.Button == MouseButtons.Left && e.Clicks == 1)
+            {
+                DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo gridHitInfo = gvFieldInfo.CalcHitInfo(new Point(e.X, e.Y));
+
+                //// 判断光标是否在行内  
+                if (gridHitInfo.InRow)
+                {
+                    LayerOperation.FlashShape(this, (frmFrame)this.Owner,false);
                 }
             }
         }

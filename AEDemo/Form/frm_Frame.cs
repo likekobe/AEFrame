@@ -145,7 +145,7 @@ namespace AEDemo
                 pGraphicsContainer.AddElement(pEle, 0);
                 pActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogOperation.WriteLog("鹰眼地图同步移动失败", ex.ToString());
             }
@@ -248,7 +248,6 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ////TODO：要素属性查询
             if (Parameters.g_iLayerCount > 0)
             {
                 frmPropertyQuery frm = new frmPropertyQuery();
@@ -291,6 +290,7 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnSQLQuery_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            ////TODO：SQL查询待优化
             if (Parameters.g_iLayerCount > 0)
             {
                 frmSQLQuery frm = new frmSQLQuery();
@@ -488,22 +488,23 @@ namespace AEDemo
 
         private void 缩放到图层ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 IFeatureLayer pFeaLayer = Parameters.g_pSelectedLayer as IFeatureLayer;
-                IFeatureClass pFeaClass = pFeaLayer.FeatureClass;
-                int iFeaCount = pFeaClass.FeatureCount(null);
-                //IEnvelope pEnvlope = pFeaClass.GetFeature(0).Shape.Envelope;
-                IEnvelope pEnvlope = new EnvelopeClass();
+                //IFeatureClass pFeaClass = pFeaLayer.FeatureClass;
+                //int iFeaCount = pFeaClass.FeatureCount(null);
+                
+                //IEnvelope pEnvlope = new EnvelopeClass();
 
-                for (int i = 0; i < iFeaCount; i++)
-                {
-                    IFeature pFea = pFeaClass.GetFeature(i);
+                //for (int i = 0; i < iFeaCount; i++)
+                //{
+                //    IFeature pFea = pFeaClass.GetFeature(i);
 
-                    pEnvlope.Union(pFea.Shape.Envelope);
-                }
+                //    pEnvlope.Union(pFea.Shape.Envelope);
+                //}
 
-                this.axMapControl1.Extent = pEnvlope;
+                this.axMapControl1.Extent = pFeaLayer.AreaOfInterest;
                 this.axMapControl1.Refresh();
 
             }
@@ -600,11 +601,11 @@ namespace AEDemo
         {
             ////TODO：设置图层显示的Tips
 
-            ILayer pLayer=null;
+            ILayer pLayer = null;
 
-            for (int i = 0; i < this.axMapControl1.Map.LayerCount;i++ )
+            for (int i = 0; i < this.axMapControl1.Map.LayerCount; i++)
             {
-                if(this.axMapControl1.Map.get_Layer(i).Name.Equals("jmd"))
+                if (this.axMapControl1.Map.get_Layer(i).Name.Equals("jmd"))
                 {
                     pLayer = this.axMapControl1.Map.get_Layer(i);
                     break;
@@ -618,7 +619,7 @@ namespace AEDemo
             string sTip = string.Empty;
 
             sTip = pFeaLayer.get_TipText(e.mapX, e.mapY, pActiveView.FullExtent.Width / 100);
-            
+
             toolTip1.SetToolTip(axMapControl1, sTip);
 
         }
@@ -653,7 +654,7 @@ namespace AEDemo
             }
             catch (Exception ex)
             {
-
+                LogOperation.WriteLog("开启编辑失败", ex.ToString());
             }
         }
 
@@ -670,7 +671,7 @@ namespace AEDemo
 
             btnOperationLayer.Enabled = false;
             btnOperationTask.Enabled = false;
-         
+
         }
 
         /// <summary>
@@ -680,7 +681,7 @@ namespace AEDemo
         /// <param name="e"></param>
         private void btnSaveEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-           
+
         }
 
         private void cboOperationTask_SelectedIndexChanged(object sender, EventArgs e)
@@ -690,14 +691,10 @@ namespace AEDemo
 
         private void cboOperationLayer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string sLayerName = (sender as ComboBoxEdit).SelectedText.ToString();
-            Edit.Add(sLayerName, this);
+           
         }
         #endregion
 
-        
-
-     
 
     }
 }

@@ -1,0 +1,2 @@
+System.Runtime.InteropServices.InvalidComObjectException: COM 对象与其基础 RCW 分开后就不能再使用。
+   在 AEDemo.LayerOperation.ShowPropertyDetails(frmPropertyDetails frm, ILayer Layer) 位置 E:\Github\AEFrame\AEDemo\Class\unt_LayerOperation.cs:行号 300
